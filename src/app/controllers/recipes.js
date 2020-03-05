@@ -45,19 +45,18 @@ module.exports = {
            id.push(file.id)
         }
 
-        const idPromise = id.map(fileId => Recipe.files({
+        /*const idPromise = id.map(fileId => Recipe.files({
             fileId
           }))
 
         results = await Promise.all(idPromise)
 
-        console.log(results)
         
         let files = results.rows
         files = files.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-        }))
+        }))*/
               
         if(items[0] == undefined) {
             return res.render("admin/recipes/recipes")
@@ -81,7 +80,7 @@ module.exports = {
             page
         }
 
-         return res.render("admin/recipes/recipes", {results, items, pagination, filter})
+         return res.render("admin/recipes/recipes", {items, pagination, filter})
     },
 
     async create(req, res) {
@@ -129,7 +128,7 @@ module.exports = {
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
         }))
-
+       
         return res.render("admin/recipes/show", {item, files})
     },
     
@@ -145,6 +144,7 @@ module.exports = {
         //get images
         results = await Recipe.files(item.id);
         let files = results.rows
+        console.log(files)
         files = files.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`

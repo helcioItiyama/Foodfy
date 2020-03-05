@@ -124,7 +124,7 @@ module.exports = {
         return db.query(query, [limit, offset])
     },
 
-        files({id}) {
+        files(id) {
         return db.query(`
         SELECT files.*, recipe_id, file_id
         FROM files
