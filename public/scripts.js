@@ -15,43 +15,52 @@ for (let i = 0; i < icons.length; i++) {
     })
 }
 
-function addIngredient() {
-    const ingredients = document.querySelector("#ingredients");
-    const fieldContainer = document.querySelectorAll(".ingredient");
-  
-    // Realiza um clone do último ingrediente adicionado
-    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
-  
-    // Não adiciona um novo input se o último tem um valor vazio
-    if (newField.children[0].value == "") return false;
-  
-    // Deixa o valor do input vazio
-    newField.children[0].value = "";
-    ingredients.appendChild(newField);
+
+// Campos dinamicos
+const buttonAddIngredient = document.querySelector("button.add-ingredient")
+const buttonAddPreparation = document.querySelector("button.add-preparation")
+
+if (buttonAddIngredient && buttonAddPreparation) {
+
+    buttonAddIngredient.addEventListener("click", addIngredient);
+    buttonAddPreparation.addEventListener("click", addPreparation);
+
+    function addField(fieldContainer, fields) {
+        // Realiza um clone do último ingrediente adicionado
+        if(fieldContainer.length == 0) return 
+        const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+    
+        // Não adiciona um novo input se o último tem um valor vazio
+        if (newField.children[0].value == "") return false;
+    
+        // Deixa o valor do input vazio
+        newField.children[0].value = "";
+
+        fields.appendChild(newField);
+    }
+
+    function addIngredient() {
+        const fieldIngredients = document.querySelector("#ingredients");
+        const fieldContainer = document.querySelectorAll(".ingredient");
+    
+
+        addField(fieldContainer, fieldIngredients)
+    }
+    
+    function addPreparation() {
+        const fieldPreparation = document.querySelector("#preparation");
+        const fieldContainer = document.querySelectorAll(".step");
+
+        addField(fieldContainer, fieldPreparation)
+    }    
+
 }
-  
-document.querySelector(".add-ingredient")
-document.addEventListener("click", addIngredient);
-
-function addPreparation() {
-    const preparation = document.querySelector("#preparation");
-    const fieldContainer2 = document.querySelectorAll(".step");
-
-    // Realiza um clone do último ingrediente adicionado
-    const newField2 = fieldContainer2[fieldContainer2.length - 1].cloneNode(true);
-
-    // Não adiciona um novo input se o último tem um valor vazio
-    if (newField2.children[0].value == "") return false;
-
-    // Deixa o valor do input vazio
-    newField2.children[0].value = "";
-    preparation.appendChild(newField2);
-}
-  
-document.querySelector(".add-preparation")
-document.addEventListener("click", addPreparation);
 
 
+
+
+
+// Delete
 const deleteButtons = document.querySelectorAll("#delete");
 for (let deleteButton of deleteButtons) {
     deleteButton.addEventListener("submit", (event) => {

@@ -36,28 +36,15 @@ module.exports = {
         let results = await Recipe.paginate(params);
         let items = results.rows;
 
-        let recipes = await Recipe.all()
-        
-        // essa parte que não estou conseguindo fazer
-        let id = []
-        let filesId = recipes.rows
-        for (let file of filesId) {
-            
-           id.push(file.id)
-        }
-        console.log(id)
-        /*const idPromise = id.map(fileId => Recipe.files({
-            fileId
-          }))
+        // loop sobre os items para pegar o id e 1 item
+        const itemsPromise = items.map(async item => {
+            //buscar as imagens da receita
+            const files = await Recipe.files(item.id);
+            //colocar em algum lugar (item.src)
+            item.src = files.rows[0].path.replace("public", "")
+        })
 
-        results = await Promise.all(idPromise)
-
-        
-        let files = results.rows
-        files = files.map(file => ({
-            ...file,
-            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-        }))*/
+        await Promise.all(itemsPromise)
               
         if(items[0] == undefined) {
             return res.render("admin/recipes/recipes")

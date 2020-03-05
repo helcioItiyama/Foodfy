@@ -1,9 +1,9 @@
 const db = require('../../config/db');
-const {date} = require('../../lib/utils');
+const { date } = require('../../lib/utils');
 
 module.exports = {
     all() {
-        return db.query (`
+        return db.query(`
         SELECT recipes.*, chefs.name AS chefs_name
         FROM recipes
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
@@ -22,11 +22,11 @@ module.exports = {
         ) VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id`
 
-        const filteredIngredients = data.ingredients.filter(function(ingredients){
+        const filteredIngredients = data.ingredients.filter(function (ingredients) {
             return ingredients != ""
         })
-    
-        const filteredPreparation = data.preparation.filter(function(preparation){
+
+        const filteredPreparation = data.preparation.filter(function (preparation) {
             return preparation != ""
         })
 
@@ -40,7 +40,7 @@ module.exports = {
             data.information,
             date(Date.now()).iso,
             data.chefs
-            ]
+        ]
 
         return db.query(query, values)
     },
@@ -70,11 +70,11 @@ module.exports = {
                 chef_id = ($6)
             WHERE id = $7`
 
-        const filteredIngredients = data.ingredients.filter(function(ingredients){
+        const filteredIngredients = data.ingredients.filter(function (ingredients) {
             return ingredients != ""
         })
-    
-        const filteredPreparation = data.preparation.filter(function(preparation){
+
+        const filteredPreparation = data.preparation.filter(function (preparation) {
             return preparation != ""
         })
 
@@ -101,13 +101,13 @@ module.exports = {
     },
 
     paginate(params) {
-        const {filter, limit, offset} = params;
+        const { filter, limit, offset } = params;
 
         let query = "",
             filterQuery = "",
             totalQuery = `(SELECT count(*) FROM recipes) AS total`
-          
-        if(filter) {
+
+        if (filter) {
             filterQuery = `
                 WHERE recipes.title ILIKE '%${filter}%'
                 OR chefs.name ILIKE '%${filter}%'`
@@ -124,13 +124,13 @@ module.exports = {
         return db.query(query, [limit, offset])
     },
 
-        files(id) {
+    files(id) {
         return db.query(`
-        SELECT files.*, recipe_id, file_id
+        SELECT files.*, recipe_files.recipe_id as recipe_id
         FROM files
         LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
         WHERE recipe_files.recipe_id = $1
         `, [id]
         )
-      },
+    },
 }
