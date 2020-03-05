@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Gerenciar Chefs</title>
+    {% endblock %}
+
+{% block content %}
+    <div class="page_title">
+        <h2>Gerenciar Chefs</h2>
+    </div>
+    
+    <div class="edit_button new_recipe">
+        <form action="/admin/chefs" method="GET">
+            <input 
+                type="text"
+                    name="filter"
+                value="{{filter}}"
+                placeholder="Filtrar por chef"
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+        <a href="/admin/chefs/create">Adicionar Chef</a>
+    </div>
+
+    <section>
+        <div class="food_box chef">
+            {% for item in items %}
+                <div class="recipes">
+                    <div class="profiles">
+                        <div class="image" style="background: url({{item.avatar_url}}) no-repeat center top/ cover"></div>
+                        <div>
+                            <h4 class ="title">{{item.name}}</h4>
+                            <a href="/admin/chefs/{{item.id}}">Visualizar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}           
+        </div>
+    </section>
+
+     <div class="pagination chef"
+        data-page="{{pagination.page}}"
+        data-total="{{pagination.total}}"
+        data-filter="{{filter}}">
+    </div>
+        
+{% endblock %}

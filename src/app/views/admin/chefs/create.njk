@@ -1,0 +1,18 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Chefs</title>
+    {% endblock %}
+
+{% block content %}
+    <div class="page_title">
+        <h2>Criando Chef</h2>
+    </div>
+
+    <form method="post" action="/admin/chefs">
+    
+        {% include "admin/chefs/fields.njk" %}
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Receitas</title>
+    {% endblock %}
+
+{% block content %}
+    <div class="page_title">
+        <h2>Receita: {{item.title}}</h2>
+    </div>
+
+    <div class="edit_button">
+        <a href="/admin/recipes/{{item.id}}/edit">Editar Receita</a>
+    </div>
+
+    <section>
+        <div class="recipes_page">
+
+            <div class="gallery">
+                <div class="highlight">
+                    {% if not files[0] %}
+                        <img src="https://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="produto sem foto">
+                    {% else %}
+                        <img 
+                            src="{{files[0].src}}" 
+                            alt="{{files[0].name}}"
+                            onclick="LightBox.open()"
+                        >
+                    {% endif %}
+
+                    <div class="lightbox-target">
+                        <img src="{{files[0].src}}" alt="{{files[0].name}}" >
+                        <a 
+                            href="#" 
+                            class="lightbox-close"
+                            onclick="LightBox.close()"
+                        >
+                            <i class="material-icons">close</i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="gallery_preview">
+                    {% for image in files %}
+                        <img 
+                            src="{{image.src}}" 
+                            alt="{{image.name}}"
+                            {% if loop.index0 %}
+                            class="active"
+                            {% endif %}
+                            onclick="ImageGallery.setImage(event)"
+                        >
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h3>{{item.title}}</h3>
+            <p>por {{item.chefs_name}}</p>
+
+            <div>
+                <h4>Ingredientes <span class="icons">esconder</span></h4>
+                <div class ="remove">
+                
+                    <ul>
+                        {% for ingredient in item.ingredients %}
+                            <li>{{ingredient}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h4>Modo de preparo <span class="icons">esconder</span></h4> 
+                <div class = "remove">
+                    <ul>
+                        {% for line in item.preparation %}
+                            <li>{{line}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="additional_information ">
+                <h4>Informações adicionais <span class="icons">esconder</span></h4>
+                <div class="remove">
+                    <p >{{item.information}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

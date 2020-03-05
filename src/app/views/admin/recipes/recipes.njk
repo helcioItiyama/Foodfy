@@ -1,0 +1,45 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Receitas</title>
+    {% endblock %}
+
+{% block content %}
+    <div class="page_title">
+        <h2>Gerenciar Receitas</h2>
+    </div>
+    
+    <div class="edit_button new_recipe">
+        <form action="/admin/recipes" method="GET">
+            <input 
+                type="text"
+                    name="filter"
+                value="{{filter}}"
+                placeholder="Filtrar por receita ou por chef"
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+        <a href="/admin/recipes/create">Nova Receita</a>
+    </div>
+
+    <section>
+        <div class="food_box recipe">
+            {% for item in items %}
+                <div class="recipes">
+                    <img class ="image" src="{{results.src}}" alt="imagem de {{item.title}}">
+                    <h3 class ="title">{{item.title}}</h3>
+                    <p class = "author">por {{item.chefs_name}}</p>
+                    <a href="/admin/recipes/{{item.id}}">Visualizar</a>
+                </div>
+            {% endfor %}         
+        </div>
+    </section>
+
+    <div 
+        class="pagination"
+        data-page="{{pagination.page}}"
+        data-total="{{pagination.total}}"
+        data-filter="{{filter}}">
+    </div>
+    
+{% endblock %}

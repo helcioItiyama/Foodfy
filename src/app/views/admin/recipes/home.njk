@@ -1,0 +1,33 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Foodfly</title>
+    {% endblock %}
+
+{% block content %}
+
+        <section>
+            <div class = "box">
+                <h1>{{info.title}}</h1>
+                <p>{{info.description}}</p>
+                <img src="{{info.image}}" alt="Cozinheiro">
+            </div>        
+        </section>
+
+        <section>
+            <h2>{{info.description2}}</h2>
+
+            <div class="food_box">
+                {% for item in items %}
+                {% if loop.index <= 6 %}
+                    <div class="recipes" id="hamburger">
+                        <img src="{{item.image}}" alt="imagem de {{item.title}}">
+                        <h3>{{item.title}}</h3>
+                        <p>por {{item.chefs_name}}</p>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>    
+        </section>
+
+{% endblock %}
