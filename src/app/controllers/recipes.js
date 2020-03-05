@@ -42,9 +42,10 @@ module.exports = {
         let id = []
         let filesId = recipes.rows
         for (let file of filesId) {
+            
            id.push(file.id)
         }
-
+        console.log(id)
         /*const idPromise = id.map(fileId => Recipe.files({
             fileId
           }))
@@ -144,12 +145,12 @@ module.exports = {
         //get images
         results = await Recipe.files(item.id);
         let files = results.rows
-        console.log(files)
+        
         files = files.map(file => ({
             ...file,
             src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
         }))
-
+   
         return res.render("admin/recipes/edit", {item, chefOptions, files})
     },
     

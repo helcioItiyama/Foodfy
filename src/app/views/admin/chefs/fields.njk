@@ -14,10 +14,32 @@
     </div>
 
     <div>
-        <h5>Avatar</h5>
-        <input 
-        type="txt"
-        placeholder="Escreva o seu nome">
+        <h5>Foto</h5>
+        <div id="photos-upload">
+            <input 
+                id="photos-input"
+                type="file"
+                multiple
+                name="photos"
+                accept="image/*"
+                onchange="PhotosUpload.handleFileInput(event)"
+                >
+            <i class="material-icons">add</i>
+        </div>
+    </div>
+
+    <div id="photos-preview">
+        {% if files %}
+            {% for image in files %}
+                <div class="photo" id="{{image.id}}">
+                    <img src="{{image.src}}" alt="{{image.name}}">
+                    <i class="material-icons"
+                        onclick="PhotosUpload.removeOldPhoto(event)"
+                    >close</i>
+                </div>
+            {% endfor %}
+            <input type="hidden" name ="removed_files">
+        {% endif %} 
     </div>
 
 </div>
