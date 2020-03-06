@@ -14,6 +14,7 @@ module.exports = {
             filename,
             path
         ]
+
         const results = await db.query(query, values)
 
         return results.rows[0].id

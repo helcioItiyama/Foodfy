@@ -13,6 +13,15 @@ module.exports = {
 
         const recipes = await Recipe.all();
         const items = recipes.rows;
+         // loop sobre os items para pegar o id e 1 item
+         const itemsPromise = items.map(async item => {
+            //buscar as imagens da receita
+            const files = await Recipe.files(item.id);
+            //colocar em algum lugar (item.src)
+            item.src = files.rows[0].path.replace("public", "")
+        })
+        
+        await Promise.all(itemsPromise)
         return res.render('admin/recipes/home', {info, items});
     },
 
@@ -36,11 +45,8 @@ module.exports = {
         let results = await Recipe.paginate(params);
         let items = results.rows;
 
-        // loop sobre os items para pegar o id e 1 item
         const itemsPromise = items.map(async item => {
-            //buscar as imagens da receita
             const files = await Recipe.files(item.id);
-            //colocar em algum lugar (item.src)
             item.src = files.rows[0].path.replace("public", "")
         })
 

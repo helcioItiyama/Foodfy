@@ -15,7 +15,14 @@
 
     <section>
         <div class="recipes_page"> 
-            <div></div>
+        {% if not files %}
+            <img src="https://placehold.it/500x500?text=PRODUTO SEM FOTO" alt="produto sem foto">
+        {% else %}
+            <img class="chef_image"
+                src="{{files.src}}" 
+                alt="{{files.name}}"
+            >
+        {% endif %}
             <h3>{{item.name}}</h3>
             <p>{{item.total_recipes}} receitas</p>
 

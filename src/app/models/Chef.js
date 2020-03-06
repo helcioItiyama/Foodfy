@@ -16,13 +16,15 @@ module.exports = {
         const query = `
         INSERT INTO chefs(
             name,
-            created_at
-        ) VALUES ($1, $2)
+            created_at,
+            file_id
+        ) VALUES ($1, $2, $3)
         RETURNING id`
 
         const values = [
             data.name,
-            date(Date.now()).iso
+            date(Date.now()).iso,
+            data.fileId
             ]
 
         return db.query(query, values)
@@ -46,11 +48,13 @@ module.exports = {
     update(data) {
         const query = `
             UPDATE chefs
-            SET name = ($1)
-            WHERE id = $2`
+            SET name = ($1),
+                file_id = ($2)
+            WHERE id = $3`
 
         const value = [
             data.name,
+            data.fileId,
             data.id
         ]
 
@@ -91,6 +95,12 @@ module.exports = {
             LIMIT $1 OFFSET $2`
 
         return db.query(query, [limit, offset])
+    },
+
+    files(id) {
+        return db.query(`SELECT * 
+        FROM files 
+        LEFT JOIN chefs ON (files.id = chefs.file_id)
+        WHERE chefs.id = $1`, [id])
     }
-        
 }

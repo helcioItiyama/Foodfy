@@ -116,6 +116,8 @@ section h2, .page_title h2 {
 .food_box .recipes img {
     width: 300px;
     height: 140px;
+    object-fit: cover;
+    object-position: 50% 50%;
     border-radius: 15px;
    
 }
@@ -193,6 +195,7 @@ footer h4 {
 
 .recipes_page .chef_image {
     margin-top: 30px;
+    object-fit: cover;
     width: 200px;
     height: 200px;
     border-radius: 50%;

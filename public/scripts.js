@@ -162,8 +162,12 @@ const PhotosUpload = {
     },
 
     hasLimit(event) {
-        const {uploadLimit, input, preview} = PhotosUpload;
-        const {files: fileList} = input;
+        let {uploadLimit, input, preview} = PhotosUpload;
+        let {files: fileList} = input;
+       
+        if(input.name == "chefs-photos") {
+            uploadLimit = 1
+        }
 
         if(fileList.length > uploadLimit) {
             alert(`Enviar no máximo ${uploadLimit} fotos!`)
@@ -262,4 +266,4 @@ const LightBox = {
         LightBox.target.style.bottom = "initial";
         LightBox.closeButton.style.top = "-80px";
     }
-}
+}   

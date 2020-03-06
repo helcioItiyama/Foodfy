@@ -21,10 +21,10 @@ routes.delete("/admin/recipes", recipes.delete);
 
 routes.get("/admin/chefs", chefs.index);
 routes.get("/admin/chefs/create", chefs.create);
-routes.post("/admin/chefs", chefs.post);
+routes.post("/admin/chefs", multer.array('chefs-photos', 1), chefs.post);
 routes.get("/admin/chefs/:id", chefs.show);
 routes.get("/admin/chefs/:id/edit", chefs.edit);
-routes.put("/admin/chefs", chefs.put);
+routes.put("/admin/chefs", multer.array('chefs-photos', 1), chefs.put);
 routes.delete("/admin/chefs", chefs.delete);
 
 
