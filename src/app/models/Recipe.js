@@ -58,7 +58,7 @@ module.exports = {
         return db.query(`SELECT name, id
             FROM chefs`)
     },
-
+ 
     update(data) {
         const query = `
             UPDATE recipes

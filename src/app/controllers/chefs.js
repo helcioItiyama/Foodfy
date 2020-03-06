@@ -1,5 +1,6 @@
 const Chef = require('../models/Chef');
-const File = require('../models/File')
+const File = require('../models/File');
+const Recipe = require("../models/Recipe");
 
 module.exports = {
     async index(req, res) {
@@ -16,6 +17,11 @@ module.exports = {
         }
         const results = await Chef.paginate(params);
         const items = results.rows;
+        const itemsPromise = items.map(async item => {
+            const files = await Chef.files(item.id);
+            item.src = files.rows[0].path.replace("public", "")
+        })
+        await Promise.all(itemsPromise)
 
         if(items[0] == undefined) {
             return res.render("admin/chefs/chefs")
@@ -58,7 +64,7 @@ module.exports = {
         results = await Chef.files(item.id)
 
         let files = results.rows[0].path
-
+        
         files = {
             ...item,
             src: files.replace("public", "")
@@ -68,6 +74,13 @@ module.exports = {
         
         const chefs = await Chef.RecipesOwned()
         const recipes = chefs.rows;
+
+        const itemsPromise = recipes.map(async recipe => {
+            const files = await Recipe.files(recipe.id);
+            recipe.src = files.rows[0].path.replace("public", "")
+        })
+        await Promise.all(itemsPromise)
+
         return res.render("admin/chefs/show", {item, files, recipes})
     },
     
@@ -94,26 +107,34 @@ module.exports = {
                 return res.send("Por favor, preencha todos os campos")
             }
         }
-            console.log(req.files.length)
+
         if(req.files.length != 0) {
-            console.log(req.files)
             let results = await File.create(req.files[0])
-            const chefs = {
+            let chefs = {
                 ...req.body,
                 fileId: results
             }
-        }   
-            const chefs = req.body
+            await Chef.update(chefs);
+        } else {
+            let results = await Chef.find(req.body.id);
+            let item = results.rows[0];
+            results = await Chef.files(item.id)
 
-        await Chef.update(chefs);
+            let chef = {
+                ...req.body,
+                fileId: results.rows[0].file_id
+            }
+            await Chef.update(chef);
+        }
 
-        /*if(req.body.removed_files) {
+        if(req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",");
+            
             const lastIndex = removedFiles.length - 1;
             removedFiles.splice(lastIndex, 1)
-            const removedFilesPromise = removedFiles.map(id => File.delete(id))
-            await Promise.all(removedFilesPromise)
-        }*/
+            File.delete(removedFiles[0])
+            console.log(removedFiles)
+        }
     
         return res.redirect(`/admin/chefs/${req.body.id}`)
     },
@@ -126,6 +147,6 @@ module.exports = {
         }
         
         await Chef.delete(req.body.id)
-        return res.redirect("/admin/chefs")     
+        return res.redirect("/admin/chefs")      
     }
 };

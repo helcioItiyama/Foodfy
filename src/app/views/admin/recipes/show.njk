@@ -25,7 +25,7 @@
                             src="{{files[0].src}}" 
                             alt="{{files[0].name}}"
                             onclick="LightBox.open()"
-                        >
+                        > 
                     {% endif %}
 
                     <div class="lightbox-target">
@@ -45,7 +45,7 @@
                         <img 
                             src="{{image.src}}" 
                             alt="{{image.name}}"
-                            {% if loop.index0 %}
+                            {% if loop.index0 == 0 %}
                             class="active"
                             {% endif %}
                             onclick="ImageGallery.setImage(event)"

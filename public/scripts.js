@@ -243,6 +243,7 @@ const ImageGallery = {
         target.classList.add('active')
 
         ImageGallery.highlight.src = target.src;
+        LightBox.image.src = target.src;
     }
 }
 

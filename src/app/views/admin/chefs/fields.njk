@@ -5,15 +5,6 @@
 <section class="recipes_page create">
 
     <div>
-        <h5>Nome do chef</h5>
-        <input 
-        type="txt"
-        name="name"
-        placeholder="Escreva o nome do chef"
-        value="{{files.name}}">
-    </div>
-
-    <div>
         <h5>Foto</h5>
         <div id="photos-upload">
             <input 
@@ -27,10 +18,10 @@
             <i class="material-icons">add</i>
         </div>
     </div>
-
+ 
     <div id="photos-preview">
         {% if files %}
-                <div class="photo" id="{{files.id}}">
+                <div class="photo" id="{{files.file_id}}">
                     <img src="{{files.src}}" alt="{{files.name}}">
                     <i class="material-icons"
                         onclick="PhotosUpload.removeOldPhoto(event)"
@@ -38,6 +29,15 @@
                 </div>
             <input type="hidden" name ="removed_files">
         {% endif %} 
+    </div>
+
+    <div>
+        <h5>Nome do chef</h5>
+        <input 
+        type="txt"
+        name="name"
+        placeholder="Escreva o nome do chef"
+        value="{{files.name}}">
     </div>
 
 </div>

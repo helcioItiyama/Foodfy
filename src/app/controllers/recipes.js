@@ -7,7 +7,7 @@ module.exports = {
         const info = {
             title: "As melhores receitas",
             description: "Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.",
-            image: "/chef.png",
+            image: "/images/chef.png",
             description2: "As 6 primeiras receitas"
         }
 
@@ -100,11 +100,11 @@ module.exports = {
 
         const filesPromise = req.files.map(file => File.create({...file}))
         const filesId = await Promise.all(filesPromise);
+
         const relationPromise = filesId.map(fileId => FileRecipe.create({
             recipe_id: recipeId,
             file_id: fileId
           }))
-      
         await Promise.all(relationPromise)
 
         return res.redirect(`/admin/recipes`)

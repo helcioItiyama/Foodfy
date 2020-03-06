@@ -27,7 +27,7 @@
             {% for item in items %}
                 <div class="recipes">
                     <div class="profiles">
-                        <div class="image" style="background: url({{item.avatar_url}}) no-repeat center top/ cover"></div>
+                        <img class="image" src="{{item.src}}" alt="foto de {{item.name}}">
                         <div>
                             <h4 class ="title">{{item.name}}</h4>
                             <a href="/admin/chefs/{{item.id}}">Visualizar</a>

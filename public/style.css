@@ -162,7 +162,7 @@ section h2, .page_title h2 {
     margin-top: 200px;
 }
 
-.food_box .image {
+.food_box.chef img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -205,6 +205,7 @@ footer h4 {
 .recipes_profile .recipe_box img {
     width: 200px;
     height: 90px;
+    object-fit: cover;
     border-radius: 15px;
    
 }

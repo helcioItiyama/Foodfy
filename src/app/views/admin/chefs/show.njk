@@ -10,7 +10,7 @@
     </div>
 
     <div class="edit_button">
-        <a href="/admin/chefs/{{item.id}}/edit">Editar Receita</a>
+        <a href="/admin/chefs/{{item.id}}/edit">Editar Chef</a>
     </div>
 
     <section>
@@ -32,7 +32,7 @@
                         {% for recipe in recipes %}
                             {% if item.id == recipe.chef_id %}
                                 <div class="recipe_box">
-                                    <img class ="image" alt="imagem de {{recipe.title}}">
+                                    <img class ="image" src="{{recipe.src}}" alt="imagem de {{recipe.title}}">
                                     <div>
                                         <h3 class ="title">{{recipe.title}}</h3>
                                         <p class = "author">por {{item.name}}</p>
