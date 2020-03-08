@@ -22,6 +22,7 @@ module.exports = {
         })
         
         await Promise.all(itemsPromise)
+        console.log(items)
         return res.render('admin/recipes/home', {info, items});
     },
 

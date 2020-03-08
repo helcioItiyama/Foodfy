@@ -50,8 +50,11 @@ module.exports = {
 
     RecipesOwned() {
         try {
-            return db.query(`SELECT chef_id, id, title
-                FROM recipes`)
+            return db.query(`
+                SELECT chef_id, id, title
+                FROM recipes
+                ORDER BY created_at DESC
+                `)
         } catch(err) {
             console.log(`database recipesowned error ${err}`)
         }
