@@ -53,7 +53,7 @@ module.exports = {
             fileId: results
         }
         await Chef.create(chefs);
-        return res.redirect(`/admin/chefs`)
+        return res.redirect(`/chefs`)
     },
 
     async show(req, res) {
@@ -133,10 +133,9 @@ module.exports = {
             const lastIndex = removedFiles.length - 1;
             removedFiles.splice(lastIndex, 1)
             File.delete(removedFiles[0])
-            console.log(removedFiles)
         }
     
-        return res.redirect(`/admin/chefs/${req.body.id}`)
+        return res.redirect(`/chefs/${req.body.id}`)
     },
     
     async delete(req, res) {
@@ -147,6 +146,6 @@ module.exports = {
         }
         
         await Chef.delete(req.body.id)
-        return res.redirect("/admin/chefs")      
+        return res.redirect("/chefs")      
     }
 };

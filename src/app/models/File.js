@@ -19,7 +19,7 @@ module.exports = {
 
             return results.rows[0].id
         } catch(err) {
-            console.log(`database file create error ${err}`)
+            console.error(err)
         }
     },
 

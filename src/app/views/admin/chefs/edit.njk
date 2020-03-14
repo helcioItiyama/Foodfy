@@ -10,14 +10,14 @@
             <h2>Editando Chef</h2>
     </div>
 
-    <form id="delete" action="/admin/chefs?_method=DELETE" method="POST" >
+    <form id="delete" action="/chefs?_method=DELETE" method="POST" >
         <div class="edit_button button_delete">
             <button type="submit">Deletar</button>
         </div>
         <input type="hidden" name="id" value="{{item.id}}">
     </form>
 
-    <form action="/admin/chefs?_method=PUT" method="POST" enctype="multipart/form-data">
+    <form action="/chefs?_method=PUT" method="POST" enctype="multipart/form-data">
         {% include "admin/chefs/fields.njk" %}
         <input type="hidden" name="id" value="{{item.id}}">
     </form>

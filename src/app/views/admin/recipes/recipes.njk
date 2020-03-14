@@ -10,7 +10,7 @@
     </div>
     
     <div class="edit_button new_recipe">
-        <form action="/admin/recipes" method="GET">
+        <form action="/recipes" method="GET">
             <input 
                 type="text"
                     name="filter"
@@ -19,7 +19,7 @@
             >
             <button type="submit">Filtrar</button>
         </form>
-        <a href="/admin/recipes/create">Nova Receita</a>
+        <a href="/recipes/create">Nova Receita</a>
     </div>
 
     <section>
@@ -29,7 +29,7 @@
                     <img class ="image" src="{{item.src}}" alt="imagem de {{item.title}}">
                     <h3 class ="title">{{item.title}}</h3>
                     <p class = "author">por {{item.chefs_name}}</p>
-                    <a href="/admin/recipes/{{item.id}}">Visualizar</a>
+                    <a href="/recipes/{{item.id}}">Visualizar</a>
                 </div>
             {% endfor %}         
         </div>

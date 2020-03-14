@@ -6,8 +6,9 @@
         {% block head %}
             <title>Foodfy</title>
         {% endblock %}
-          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="/style.css">
+         
+        {% include "admin/parts/styles.njk" %}
+        
     </head>
 
     <body>
@@ -16,12 +17,14 @@
 
             <div  class="menu">
                 <a href="/">Home</a>
-                <a href="/admin/recipes/about">Sobre</a>
-                <a href="/admin/recipes">Receitas</a>
-                <a href="/admin/chefs">Chefs</a>
+                <a href="/recipes/about">Sobre</a>
+                <a href="/recipes">Receitas</a>
+                <a href="/chefs">Chefs</a>
             </div>
             
         </header>
+
+        {% include "admin/parts/messages.njk" %}
 
         {% block content %} {% endblock %}
 

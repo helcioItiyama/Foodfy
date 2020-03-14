@@ -1,0 +1,25 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Cadastro</title>
+    {% endblock %}
+
+{% block content %}
+
+<section class="user-register">
+    <form method="post" action="/admin/register">
+        <div class="header">
+            <h2>Cadastre-se</h2>
+            
+            <button class="register_button" type="submit">Salvar</button>
+        </div>
+        
+        
+        <div class="fields register">
+            {% include "admin/users/fields.njk" %}
+        </div>
+        
+    </form>
+</section>
+    
+{% endblock %}

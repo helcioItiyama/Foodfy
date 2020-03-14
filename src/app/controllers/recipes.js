@@ -13,16 +13,16 @@ module.exports = {
 
         const recipes = await Recipe.all();
         const items = recipes.rows;
-         // loop sobre os items para pegar o id e 1 item
+         // loop over items to get id of each item
          const itemsPromise = items.map(async item => {
-            //buscar as imagens da receita
+            //search for images of each item
             const files = await Recipe.files(item.id);
-            //colocar em algum lugar (item.src)
+            //alocate to item.src
             item.src = files.rows[0].path.replace("public", "")
         })
         
         await Promise.all(itemsPromise)
-        console.log(items)
+       
         return res.render('admin/recipes/home', {info, items});
     },
 
@@ -108,7 +108,7 @@ module.exports = {
           }))
         await Promise.all(relationPromise)
 
-        return res.redirect(`/admin/recipes`)
+        return res.redirect(`/recipes`)
         
     },
 
@@ -132,6 +132,7 @@ module.exports = {
         let results = await Recipe.find(req.params.id);
         const item = results.rows[0];
         if(!item) return res.send("recipe not found!")
+        
         //get chefs
         const options = await Recipe.chefSelectOptions();
         const chefOptions = options.rows;
@@ -178,12 +179,12 @@ module.exports = {
         }
 
         await Recipe.update(req.body)
-        return res.redirect(`/admin/recipes/${req.body.id}`)
+        return res.redirect(`/recipes/${req.body.id}`)
     },
     
     async delete(req, res) {
         await Recipe.delete(req.body.id)
-        return res.redirect("/admin/recipes")
+        return res.redirect("/recipes")
     }
 
 };

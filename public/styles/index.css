@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-
 :root {
     --color-letter: #111111;
 }
@@ -199,7 +197,7 @@ footer h4 {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    margin-left: 350px;
+    margin-left: 40%;
 }
 
 .recipes_profile .recipe_box img {
@@ -317,12 +315,12 @@ footer h4 {
 
 .edit_button {
     position: absolute;
-    margin-left: 955px;
+    margin-left: 72%;
     margin-top: 50px;
 }
 
 .edit_button.new_recipe {
-    margin-left: 500px;
+    margin-left: 37%;
     display: grid;
     grid-template-columns: 470px 1fr;
     box-sizing: center;
@@ -340,7 +338,8 @@ footer h4 {
     height: 30px;
 }
 
-.edit_button button, .edit_button a {
+.edit_button button, .edit_button a,
+.save_button, .register_button {
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
@@ -353,16 +352,23 @@ footer h4 {
 
 .edit_button.save_button {
     margin-top: 0;
+    padding: initial;
 }
 
 .button_delete {
     position: absolute;
     margin-top: 40px;
-    margin-left: 850px;
+    margin-left: 65%;
 }
 
 .button_delete button {
     background-color: palevioletred;
+}
+
+.register_button {
+    position: absolute;
+    margin-left: 82%;
+    margin-top: 45px;
 }
 
 /* === HIDE INFO === */
@@ -422,7 +428,7 @@ footer h4 {
 
 .pagination {
     position: relative;
-    margin-left: 600px;
+    text-align: center;
     margin-top: 90px;
 }
 
@@ -541,7 +547,7 @@ footer h4 {
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-gap: 6px;
-    margin-left: 685px;
+    margin-left: 73%;
     margin-top: 3px;
 }
 
@@ -593,7 +599,7 @@ a.lightbox-close {
     width: 50%;
     height: 50%;
     position: absolute;
-    margin-left: 1160px;
+    margin-left: 92%;
     margin-top: 50px;
     transition: 400ms;
     top: -80px;
@@ -602,4 +608,57 @@ a.lightbox-close {
 .lightbox-close i {
     font-size: 30px;
     color: black;
+}
+
+/* === REGISTER ===*/
+
+.user-register .fields h5 {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: bold;
+    margin-left: 12%;
+    color: var(--color-letter);
+}
+
+.user-register .fields input {
+    border: 1px solid #c9bfbf;;
+    margin-left: 12%;
+    padding: 8px 12px;
+    width: 60%;
+}
+
+.user-register .fields input::placeholder {
+    color: #c9bfbf;
+}
+
+.user-register .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+
+}
+
+.user-register .header h2 {
+    padding-left: 12%;
+}
+
+.user-register .fields.register {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-left: 6%;
+}
+
+.user-register .fields h5 {
+    margin-top: 70px;
+}
+
+.user-register .fields .input .error {
+    position: absolute;
+    color: red;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 72px;
+    margin-top: 10px;
 }
