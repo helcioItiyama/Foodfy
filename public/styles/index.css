@@ -339,7 +339,7 @@ footer h4 {
 }
 
 .edit_button button, .edit_button a,
-.save_button, .register_button {
+.save_button, .register_button, .button_delete.profile {
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
@@ -361,8 +361,13 @@ footer h4 {
     margin-left: 65%;
 }
 
-.button_delete button {
+.button_delete button, .button_delete.profile {
     background-color: palevioletred;
+}
+
+.button_delete.profile {
+    margin-top: 45px;
+    margin-left: 73%;
 }
 
 .register_button {
@@ -661,4 +666,9 @@ a.lightbox-close {
     line-height: 24px;
     margin-left: 72px;
     margin-top: 10px;
+}
+
+.user-register.profile .header {
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items:  center;
 }

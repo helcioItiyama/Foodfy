@@ -1,0 +1,31 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Bem-vindo ao Foodfy</title>
+    {% endblock %}
+
+{% block content %}
+
+    <section class="user-register profile">
+        <form action="/admin?_method=PUT" method="POST">
+            <div class="header">
+                <h2>Bem vindo {{user.name}}</h2>
+
+                <button class="register_button" type="submit">Salvar</button>
+               
+                <div class="button_delete profile">
+                    <div
+                    onclick="alert('Por favor entre em contato por email para poder deletar sua conta')"
+                    >Deletar</div>
+                </div>
+            </div>
+
+
+            <div class="fields register">
+                {% include "admin/users/fields.njk" %}
+            </div>
+            <input type="hidden" name="id" value="{{user.id}}">
+        </form>
+    </section>
+    
+{% endblock %}

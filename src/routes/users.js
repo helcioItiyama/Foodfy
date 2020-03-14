@@ -24,7 +24,7 @@ routes.get('/register', ProfileController.registerForm);
 routes.post('/register', UserValidator.post, ProfileController.post);
 
 //routes.put('/profile', ProfileController.put)//update Editar o usuário logado
-//routes.get('/profile', ProfileController.index) //show Mostrar o formulário com dados do usuário logado
+routes.get('/profile', ProfileController.index) //show Mostrar o formulário com dados do usuário logado
 
 // Rotas que o administrador irá acessar para gerenciar usuários
 //routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados

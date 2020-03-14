@@ -13,8 +13,8 @@ module.exports = {
         //check if user already exists
         const {email, password, passwordRepeat} = req.body;
 
-        const results = await User.findOne(email);
-        const user = results.rows[0]
+        const user = await User.findOne(email);
+      
         if(user) return res.render('admin/users/register', {
             user: req.body,
             error: "Email já cadastrado"
