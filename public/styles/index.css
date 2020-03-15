@@ -1,5 +1,6 @@
 :root {
     --color-letter: #111111;
+    --primary-color:#6558C3;
 }
 
 *{
@@ -32,9 +33,8 @@ header img {
 
 .menu {
     display: grid;
-    grid-template-columns: 45px 45px 65px 45px 350px 1fr;
+    grid-template-columns: 45px 45px 65px 45px 230px 70px;
     margin-left: 35%;
-    float: left;
     gap: 30px;
 }
 
@@ -45,6 +45,25 @@ header img {
     line-height: 19px;
     margin-top: 32px;
     padding-bottom: 36px;
+
+}
+
+.menu a:hover {
+    color: var(--primary-color);
+}
+
+.menu form {
+    position: relative;
+}
+
+.menu form button {
+    position: absolute;
+    margin-top: 35px;
+    background-color: black;
+    color: white;
+    right: 0;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .box {
@@ -142,7 +161,7 @@ section h2, .page_title h2 {
 }
 
 .food_box a, .recipe_box a {
-    color: #6558C3;
+    color: var(--primary-color);
     font-size: 14px;
     font-weight: bold;
     line-height: 16px;
@@ -317,6 +336,16 @@ footer h4 {
     position: absolute;
     margin-left: 75%;
     margin-top: 50px;
+ 
+}
+
+.edit_button button:hover,
+.edit_button a:hover,
+.save_button button:hover, 
+.register_button button:hover, 
+.button_delete.profile button:hover,
+button.login_button:hover {
+    color: black;
 }
 
 .edit_button.new_recipe {
@@ -336,18 +365,21 @@ footer h4 {
     margin-left: 120px;
     width: 200px;
     height: 30px;
+    cursor: pointer;
 }
 
 .edit_button button, .edit_button a,
-.save_button, .register_button, .button_delete.profile {
+.save_button, .register_button, 
+.button_delete.profile, .login_button {
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     line-height: 18px;
     font-weight: bold;
-    background-color:#6558C3;
+    background-color: var(--primary-color);
     border-radius: 4px;
     padding: 8px 20px;
+    cursor: pointer;
 }
 
 .edit_button.save_button {
@@ -374,6 +406,10 @@ footer h4 {
     position: absolute;
     margin-left: 82%;
     margin-top: 45px;
+}
+
+.login_button {
+    margin-left: 59.5%;
 }
 
 /* === HIDE INFO === */
@@ -424,7 +460,7 @@ footer h4 {
     line-height: 18px;
     font-weight: bold;
     margin-top: 4px;
-    color:#6558C3;
+    color: var(--primary-color);
     background: #ffffff;
     text-decoration: none;
 }
@@ -443,7 +479,7 @@ footer h4 {
 
 .pagination a,
 .pagination span {
-    color: #6558C3;
+    color: var(--primary-color);
     text-decoration: none;
     margin-right: 16px;
     font-weight: bold;
@@ -452,7 +488,7 @@ footer h4 {
 
 .pagination a:hover {
     filter: brightness(0.3);
-    border-bottom: 1px solid #6558C3;
+    border-bottom: 1px solid var(--primary-color);
 }
 
 /*=== PHOTOS UPLOAD ===*/
@@ -626,14 +662,20 @@ a.lightbox-close {
     color: var(--color-letter);
 }
 
-.user-register .fields input {
+.user-register .fields input, .login input {
     border: 1px solid #c9bfbf;;
     margin-left: 12%;
     padding: 8px 12px;
     width: 60%;
 }
 
-.user-register .fields input::placeholder {
+.login input {
+    margin-left: 35%;
+    width: 30%;
+    margin-top: 10px;
+}
+
+.user-register .fields input::placeholder, .login input {
     color: #c9bfbf;
 }
 
@@ -659,16 +701,46 @@ a.lightbox-close {
     margin-top: 70px;
 }
 
-.user-register .fields .input .error {
-    position: absolute;
-    color: red;
-    font-size: 14px;
-    line-height: 24px;
-    margin-left: 72px;
-    margin-top: 10px;
-}
-
 .user-register.profile .header {
     grid-template-columns: 2fr 1fr 1fr;
     align-items:  center;
 }
+
+/*=== LOGIN FORM ===*/
+
+.login {
+    width: 100%;
+    min-height: 90%;
+}
+
+.login h2 {
+    text-align: center;
+    margin-left: 0;
+}
+
+.login h5 {
+    margin-left: 35%;
+    margin-top: 30px;
+}
+
+.login .footer ul {
+    display: flex;
+    margin-left: 35%;
+    list-style: none;
+    margin-top: 30px;
+    align-items: flex-end;
+}
+
+.login .footer ul li:nth-child(2) {
+    margin-left: 60px;
+}
+
+.login .footer ul li a {
+    text-decoration: none;
+    color: #999;
+}
+
+.login .footer ul li a:hover {
+    color: black;
+}
+

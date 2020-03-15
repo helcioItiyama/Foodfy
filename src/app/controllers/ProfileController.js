@@ -6,11 +6,14 @@ module.exports = {
     },
 
     async post(req, res) {
-        const results = await User.create(req.body);
-        const userId = results.rows[0].id
-        req.session.userId = userId;
-
-        return res.redirect('/admin/register')
+        try {
+            const userId = await User.create(req.body);
+            req.session.userId = userId;
+    
+            return res.redirect('/admin/profile')
+        } catch(err) {
+            console.error(err)
+        }
     },
 
     async index(req, res) {

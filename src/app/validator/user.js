@@ -14,18 +14,19 @@ function checkAllFields(body) {
 }
 
 module.exports = {
+    
     async post(req, res, next) {
         //check if all fields are filled
         const fillAllFields = checkAllFields(req.body);
 
         if(fillAllFields) {
-            return res.render('/admin/register', fillAllFields)
+            return res.render('admin/users/register', fillAllFields)
         }
 
         //check if user already exists
         const {email, password, passwordRepeat} = req.body;
 
-        const user = await User.findOne(email);
+        const user = await User.findOne({where: {email}});
       
         if(user) return res.render('admin/users/register', {
             user: req.body,
@@ -83,5 +84,4 @@ module.exports = {
 
         next()
     }
-
 }

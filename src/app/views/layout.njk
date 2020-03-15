@@ -21,9 +21,16 @@
                 <a href="/recipes">Receitas</a>
                 <a href="/chefs">Chefs</a>
                 <a href="/admin/usuarios">Usuários</a>
-                <a href="/accounts">Minha Conta</a>
+                {% if session.userId %}
+                    <form action="/admin/logout" method="POST">
+                        <button class="logout">SAIR</button>
+                    </form>
+                {% else %}
+                        <a href="/accounts">ENTRAR</a>
+                {% endif %}
             </div>
             
+
         </header>
 
         {% include "admin/parts/messages.njk" %}

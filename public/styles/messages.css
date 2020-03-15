@@ -21,3 +21,18 @@
 .messages.success {
     background-color: green;
 }
+
+/*=== INVALID EMAIL MESSAGE ===*/
+.user-register .fields .input .error, .login .input .error {
+    position: absolute;
+    color: red;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 72px;
+    margin-top: 10px;
+}
+
+.login .input .error {
+    margin-left: 35%;
+    margin-top: 2px;
+}

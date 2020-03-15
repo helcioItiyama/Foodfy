@@ -5,13 +5,13 @@ const UserController = require('../app/controllers/UserController');
 const SessionController = require('../app/controllers/SessionController');
 
 const UserValidator = require('../app/validator/user');
-
-
+const SessionValidator = require('../app/validator/session');
+const {onlyAdmin} = require('../app/middlewares/session');
 
 //login/logout
-//routes.get('/login', SessionController.loginForm);
-//routes.post('/login', SessionController.login);
-//routes.post('/logout', SessionController.logout);
+routes.get('/login', SessionController.loginForm);
+routes.post('/login', SessionValidator.login, SessionController.login);
+routes.post('/logout', SessionController.logout);
 
 //reset password / forgot
 //routes.get('/forgot-password', SessionController.forgotForm);
@@ -22,8 +22,8 @@ const UserValidator = require('../app/validator/user');
 // Rotas de perfil de um usuário logado
 routes.get('/register', ProfileController.registerForm);
 routes.post('/register', UserValidator.post, ProfileController.post);
-routes.put('/profile', UserValidator.update, ProfileController.put) //edit user
-routes.get('/profile', UserValidator.show, ProfileController.index) //show form to logged in user
+routes.put('/profile', onlyAdmin, UserValidator.update, ProfileController.put) //edit user
+routes.get('/profile', onlyAdmin, UserValidator.show, ProfileController.index) //show form to logged in user
 
 // Rotas que o administrador irá acessar para gerenciar usuários
 //routes.get('/users', UserController.list) //Mostrar a lista de usuários cadastrados
