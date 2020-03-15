@@ -15,7 +15,7 @@ routes.get("/", (req, res) =>{
 })
 
 routes.get("/accounts", (req, res) => {
-    res.redirect("users/register")
+    res.redirect("/admin/register")
 })
 
 module.exports = routes

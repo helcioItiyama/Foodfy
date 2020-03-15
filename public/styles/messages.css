@@ -6,7 +6,7 @@
     display: inline;
     position: absolute;
     top: 0;
-    right: 5%;
+    right: 2%;
     color: white;
     font-size: 14px;
     padding: 32px 50px;
@@ -16,4 +16,8 @@
 
 .messages.error {
     background-color: red;
+}
+
+.messages.success {
+    background-color: green;
 }

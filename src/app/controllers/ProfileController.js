@@ -14,14 +14,30 @@ module.exports = {
     },
 
     async index(req, res) {
-        const {userId: id} = req.session;
+        const {user} = req;
 
-        const user = await User.findOne({where: {id}});
-
-        if(!user) return res.render('admin/users/register', {
-            error: "Usuário não encontrado"
-        })
-        
         return res.render('admin/users/index', {user})
+    },
+
+    async put(req, res) {
+        try {
+            let {name, email} = req.body;
+            const{user} = req;
+
+            await User.update(user.id, {name, email});
+
+            return res.render('admin/users/index', {
+                user,
+                success: "Conta atualizada com sucesso!"
+            })
+
+        } catch(err) {
+            console.error(err)
+            return res.render('admin/users/index', {
+                error: "Houve algum erro imprevisto!"
+            })
+        }
+
+
     }
 }

@@ -32,7 +32,7 @@ header img {
 
 .menu {
     display: grid;
-    grid-template-columns: 45px 45px 1fr 45px;
+    grid-template-columns: 45px 45px 65px 45px 350px 1fr;
     margin-left: 35%;
     float: left;
     gap: 30px;
@@ -315,12 +315,12 @@ footer h4 {
 
 .edit_button {
     position: absolute;
-    margin-left: 72%;
+    margin-left: 75%;
     margin-top: 50px;
 }
 
 .edit_button.new_recipe {
-    margin-left: 37%;
+    margin-left: 39%;
     display: grid;
     grid-template-columns: 470px 1fr;
     box-sizing: center;

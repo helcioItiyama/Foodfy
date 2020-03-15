@@ -71,16 +71,14 @@ module.exports = {
                 chef_id = ($6)
             WHERE id = $7`
 
-        const filteredIngredients = data.ingredients.filter(function (ingredients) {
-            return ingredients != ""
-        })
+        const filteredIngredients = data.ingredients.filter(ingredients => ingredients != ""
+        );
 
-        const filteredPreparation = data.preparation.filter(function (preparation) {
-            return preparation != ""
-        })
+        const filteredPreparation = data.preparation.filter(preparation => preparation != ""
+        );
 
-        ingredients = filteredIngredients
-        preparation = filteredPreparation
+        ingredients = filteredIngredients;
+        preparation = filteredPreparation;
 
         const value = [
             data.title,
