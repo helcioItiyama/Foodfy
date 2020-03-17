@@ -24,10 +24,10 @@ module.exports = {
 
     async put(req, res) {
         try {
-            let {name, email} = req.body;
+            let {name, email, admin} = req.body;
             const{user} = req;
 
-            await User.update(user.id, {name, email});
+            await User.update(user.id, {name, email, admin});
 
             return res.render('admin/users/index', {
                 user,

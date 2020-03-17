@@ -1,0 +1,32 @@
+ <div class="fields register">
+    <div>
+        <h5>Nome Completo</h5>
+        <div class="input">
+            <input 
+            type="text"
+            name="name"
+            placeholder="Escreva o seu nome completo"
+            value="{{user.name}}"
+            required>
+        </div>
+    </div>
+
+    <div>
+        <h5>Email</h5>
+        <div class="input">
+            <input 
+            type="email"
+            name="email"
+            placeholder="Digite seu email"
+            value="{{user.email}}"
+            onblur="Validade.apply(this, 'isEmail')"
+            >
+        </div>
+    </div>
+</div>
+
+<div class="checkbox">
+    <input type="checkbox" name="admin" value= "true" 
+    {% if user.is_admin == true %} checked {% endif %}>
+    <label for="admin">Administrador</label>
+</div>

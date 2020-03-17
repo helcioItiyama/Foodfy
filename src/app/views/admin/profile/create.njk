@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Criar Usuário</title>
+    {% endblock %}
+
+{% block content %}
+
+<section class="user-register">
+    <form method="post" action="/admin/users">
+        <div class="header">
+            <h2>Criar Usuário</h2>
+            
+            <button class="register_button" type="submit">Salvar</button>
+        </div>
+        
+        {% include "admin/profile/fields.njk" %}
+        
+    </form>
+</section>
+    
+{% endblock %}

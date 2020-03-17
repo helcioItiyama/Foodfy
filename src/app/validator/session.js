@@ -42,6 +42,42 @@ module.exports = {
         } catch(err) {
             console.error(err)
         }
+    },
+
+    async reset(req, res, next) {
+        const {email, password, passwordRepeat, token} = req.body;
+        //search user
+        const user = await User.findOne({where: {email}});
+     
+        if(!user) return res.render('admin/session/password-reset', {
+            user: req.body,
+            token,
+            error: "Email não encontrado"
+        })
+
+        //check if password matches
+        if(password != passwordRepeat) return res.render('admin/session/password-reset', {
+            user: req.body,
+            token,
+            error: "A repetição de senha não confere"
+        })
+       
+        //check if token matches      
+        if(token != user.reset_token) return res.render('admin/session/password-reset', {
+            user: req.body,
+            token,
+            error: "Token inválido. Solicite uma nova recuperação de senha"
+        })
+        //check if token expired
+        let now = new Date()
+        now = now.setHours(now.getHours())
+        if(now > user.reset_token_expires) return res.render('admin/session/password-reset', {
+            user: req.body,
+            error: "Token expirado. Solicite uma nova recuperação de senha"
+        })
+
+        req.user = user
+        next()
     }
 
 }

@@ -13,14 +13,13 @@
 
     <body>
         <header>
-            <img src="/images/logo.png" alt="Foodfy">
+            <a href="/"><img src="/images/logo.png" alt="Foodfy"></a>
 
             <div  class="menu">
-                <a href="/">Home</a>
                 <a href="/recipes/about">Sobre</a>
                 <a href="/recipes">Receitas</a>
                 <a href="/chefs">Chefs</a>
-                <a href="/admin/usuarios">Usuários</a>
+                <a href="/admin/users">Usuários</a>
                 {% if session.userId %}
                     <form action="/admin/logout" method="POST">
                         <button class="logout">SAIR</button>
