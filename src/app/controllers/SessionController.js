@@ -10,9 +10,11 @@ module.exports = {
 
     login(req, res) {
         try{
-            req.session.userId = req.user.id;
-            return res.redirect('/admin/profile')
 
+            req.session.userId = req.user.id;
+            req.session.admin = req.user.is_admin;
+            return res.redirect('/admin/profile')
+            
         } catch(err) {
             console.error(err)
             return res.render('admin/session/login', {
@@ -36,14 +38,14 @@ module.exports = {
         const user = req.user;
         try {
             //create token for user
-        const token = crypto.randomBytes(20).toString('hex');
-        
-        //create expiration time
-        let now = new Date;
-        now = now.setHours(now.getHours() + 1);
-        await User.update(user.id, {
-            reset_token: token,
-            reset_token_expires: now
+            const token = crypto.randomBytes(20).toString('hex');
+            
+            //create expiration time
+            let now = new Date;
+            now = now.setHours(now.getHours() + 1);
+            await User.update(user.id, {
+                reset_token: token,
+                reset_token_expires: now
         })
 
         //send email with the password recovery link
@@ -77,7 +79,7 @@ module.exports = {
     async reset(req, res) {
         try {
             const {user} = req;
-            const {password, token} = req.body
+          
             //create new password hash
             const newPassword = await hash(req.body.password, 8);
             //update user

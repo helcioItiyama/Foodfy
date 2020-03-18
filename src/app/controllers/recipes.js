@@ -13,8 +13,9 @@ module.exports = {
 
         const recipes = await Recipe.all();
         const items = recipes.rows;
+     
          // loop over items to get id of each item
-         const itemsPromise = items.map(async item => {
+        const itemsPromise = items.map(async item => {
             //search for images of each item
             const files = await Recipe.files(item.id);
             //alocate to item.src
@@ -87,7 +88,7 @@ module.exports = {
     async post(req, res) {
         const keys = Object.keys(req.body);
         for (key of keys) {
-            if (req.body[key] == "") {
+            if (req.body[key] == ""&& key != "userId") {
                 return res.send("Por favor, preencha todos os campos!")
             }
         }
@@ -95,10 +96,10 @@ module.exports = {
         if(req.files.length == 0) {
             return res.send("Por favor, envie ao menos uma imagem")
         }
-        
+      
         let results = await Recipe.create(req.body);
         const recipeId = results.rows[0].id;
-
+  
         const filesPromise = req.files.map(file => File.create({...file}))
         const filesId = await Promise.all(filesPromise);
 
@@ -107,7 +108,7 @@ module.exports = {
             file_id: fileId
           }))
         await Promise.all(relationPromise)
-
+        
         return res.redirect(`/recipes`)
         
     },
@@ -115,6 +116,7 @@ module.exports = {
     async show(req, res) {
         let results = await Recipe.find(req.params.id);
         const item = results.rows[0];
+        
         if(!item) return res.send("recipe not found!")
 
         results = await Recipe.files(item.id)

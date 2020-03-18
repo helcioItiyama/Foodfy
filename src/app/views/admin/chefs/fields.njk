@@ -1,6 +1,8 @@
-<div class="edit_button save_button">
-        <button type="submit">Salvar Chef</button>
-</div>
+{% if session.admin == true %}
+    <div class="edit_button save_button">
+            <button type="submit">Salvar Chef</button>
+    </div>
+{% endif %}
 
 <section class="recipes_page create">
 

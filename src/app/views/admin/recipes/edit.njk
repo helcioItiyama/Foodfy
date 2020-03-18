@@ -9,14 +9,14 @@
     <div class="page_title">
             <h2>Editando Receita</h2>
     </div>
-
+    {% if item.user_id == session.userId or session.admin == true %}
     <form id="delete" action="/recipes?_method=DELETE" method="POST" >
         <div class="edit_button button_delete">
             <button type="submit">Deletar</button>
         </div>
         <input type="hidden" name="id" value="{{item.id}}">
     </form>
-
+    {% endif %}
     <form action="/recipes?_method=PUT" method="POST" enctype="multipart/form-data">
         {% include "admin/recipes/fields.njk" %}
         <input type="hidden" name="id" value="{{item.id}}">

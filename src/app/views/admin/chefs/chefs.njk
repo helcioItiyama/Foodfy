@@ -19,7 +19,9 @@
             >
             <button type="submit">Filtrar</button>
         </form>
-        <a class="button" href="/chefs/create">Adicionar Chef</a>
+        {% if session.admin == true %}
+            <a class="button" href="/chefs/create">Adicionar Chef</a>
+        {% endif %}
     </div>
 
     <section>

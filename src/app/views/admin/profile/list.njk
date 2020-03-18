@@ -30,8 +30,12 @@
                         <div class="users">
                             <h4 class ="title">{{user.name}}</h4>
                             <p>{{user.email}}</p>
-                            <a href="/admin/users/{{user.id}}">Editar</a>
-                            <a class="edit_a" href="/admin/users/{{user.id}}">Remover</a>
+                            {% if session.admin == true %}
+                                <a href="/admin/users/{{user.id}}">Editar</a>
+                            {% endif %}
+                            {% if session.admin == true and session.userId != user.id %}
+                                <a class="edit_a" href="/admin/users/{{user.id}}/delete">Remover</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

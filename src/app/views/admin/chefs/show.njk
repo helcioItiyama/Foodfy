@@ -9,9 +9,11 @@
         <h2>Chef: {{item.name}}</h2>
     </div>
 
-    <div class="edit_button">
-        <a class="button" href="/chefs/{{item.id}}/edit">Editar Chef</a>
-    </div>
+    {% if session.admin == true %}
+        <div class="edit_button">
+            <a class="button" href="/chefs/{{item.id}}/edit">Editar Chef</a>
+        </div>
+    {% endif %}
 
     <section>
         <div class="recipes_page"> 

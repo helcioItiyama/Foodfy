@@ -9,9 +9,11 @@
         <h2>Receita: {{item.title}}</h2>
     </div>
 
-    <div class="edit_button">
-        <a class="button" href="/recipes/{{item.id}}/edit">Editar Receita</a>
-    </div>
+    {% if session.userId and (item.user_id == session.userId or session.admin == true) %}
+        <div class="edit_button">
+            <a class="button" href="/recipes/{{item.id}}/edit">Editar Receita</a>
+        </div>
+    {% endif %}
 
     <section>
         <div class="recipes_page">

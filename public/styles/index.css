@@ -31,10 +31,15 @@ header img {
 
 }
 
+.geral {
+    position: relative;
+    min-height: 100%;
+}
+
 .menu {
     display: grid;
-    grid-template-columns: 45px 65px 45px 230px 70px;
-    margin-left: 35%;
+    grid-template-columns: 45px 45px 65px 45px 230px 70px;
+    margin-left: 30%;
     gap: 50px;
 }
 
@@ -58,8 +63,8 @@ header img {
 
 .menu form button {
     position: absolute;
-    margin-top: 35px;
-    background-color: black;
+    margin-top: 25px;
+    background-color: #111111;
     color: white;
     right: 0;
     font-size: 16px;
@@ -128,6 +133,7 @@ section h2, .page_title h2 {
     margin-top: 40px;
     margin-left: 12%;
     gap: 20px;
+    margin-bottom: 100px;
 }
 
 .food_box .recipes img {
@@ -201,11 +207,10 @@ section h2, .page_title h2 {
 
 footer {
     width: 100%;
-    margin-top: 150px;
-    margin-bottom: 0;
+    bottom: 0;
     background: #eeeeee;
     height: 62px;
-    position: relative;
+    position: fixed;
 }
 
 footer h4 {
@@ -226,6 +231,10 @@ footer h4 {
 
 .recipes .profiles.users {
     display: block;
+}
+
+.recipes_page {
+    margin-bottom: 100px;
 }
 
 .recipes_page .chef_image {
@@ -268,6 +277,7 @@ footer h4 {
 .about_page {
     max-width: 940px;
     margin: 40px 12%;
+    margin-bottom: 100px;
 }
 
 .about_page h1 {
@@ -357,7 +367,7 @@ footer h4 {
  
 }
 
-button:hover, a.button:hover {
+button:hover, a.button:hover, .button_delete.profile:hover {
     color: black;
 }
 
@@ -381,7 +391,7 @@ button:hover, a.button:hover {
     cursor: pointer;
 }
 
-button, a.button {
+button, a.button, .button_delete.profile {
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
@@ -409,14 +419,14 @@ button, a.button {
 }
 
 .button_delete.profile {
-    margin-top: 45px;
-    margin-left: 73%;
+    margin-top: 50px;
+    margin-left: 67.5%;
 }
 
 .register_button {
     position: absolute;
-    margin-left: 82%;
-    margin-top: 45px;
+    margin-left: 75.8%;
+    margin-top: 50px;
 }
 
 .login_button {
@@ -428,10 +438,6 @@ button, a.button {
     margin-left: 58.5%;
 }
 
-button.logout {
-    cursor: pointer;
-}
-
 button.logout:hover {
     color: var(--primary-color);
 }
@@ -439,6 +445,11 @@ button.logout:hover {
 .button_delete.users {
     margin-top: 45px;
     margin-left: 73%;
+}
+
+a.login {
+    margin-left: 270px;
+    font-weight: bold;
 }
 
 /* === HIDE INFO === */
@@ -771,22 +782,4 @@ a.lightbox-close {
 
 .login .footer ul li a:hover {
     color: black;
-}
-
-/*=== USER CREATE ===*/
-
-.user-register .checkbox {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.user-register .checkbox input {
-    margin-left: 11.5%; 
-}
-
-.user-register .checkbox label {
-    margin-left: 10px;
-    font-size: 14px;
-    font-weight: bold;
 }

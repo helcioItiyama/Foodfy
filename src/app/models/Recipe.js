@@ -19,8 +19,9 @@ module.exports = {
             preparation,
             information,
             created_at,
-            chef_id
-        ) VALUES ($1, $2, $3, $4, $5, $6)
+            chef_id,
+            user_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING id`
 
         const filteredIngredients = data.ingredients.filter(function (ingredients) {
@@ -40,7 +41,8 @@ module.exports = {
             preparation,
             data.information,
             date(Date.now()).iso,
-            data.chefs
+            data.chefs,
+            data.userId
         ]
 
         return db.query(query, values)

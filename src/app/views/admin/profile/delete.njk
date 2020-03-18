@@ -1,36 +1,42 @@
 {% extends "layout.njk" %}
 
     {% block head %}
-        <title>Atualizar Usuário</title>
+        <title>Deletar Usuário</title>
     {% endblock %}
 
 {% block content %}
 
-    <section class="user-register profile">
+<section>
+    <div class="delete_user">
+   
         <form id="delete" action="/admin/users?_method=DELETE" method="POST" >
-            <div class="button_delete users">
-                <button type="submit">Deletar</button>
-            </div>
+             <h2>Deletar Usuário</h2>
+            {% if session.admin == true and session.userId != user.id %}
+                <div class="button_delete users">
+                    <button type="submit">Deletar</button>
+                </div>
+            {% endif %}
             <input type="hidden" name="id" value="{{user.id}}">
         </form>
 
-        <a href="/admin/users">Cancelar</a>
-
+        <a class=" button cancel_button" href="/admin/users">Cancelar</a>
     <div>
-        <h5>Nome Completo</h5>
-        <div class="delete_form">
-            <p>{{user.name}}</p>
+
+    <div class="delete_block">
+        <div>
+            <h5>Nome Completo</h5>
+            <div class="delete_form">
+                <p>{{user.name}}</p>
+            </div>
+        </div>
+
+        <div>
+            <h5>Email</h5>
+            <div class="delete_form">
+                <p>{{user.email}}</p>
+            </div>
         </div>
     </div>
-
-    <div>
-        <h5>Email</h5>
-        <div class="delete_form">
-            <p>{{user.email}}</p>
-        </div>
-    </div>
-</div>
-
-    </section>
+</section>
     
 {% endblock %}

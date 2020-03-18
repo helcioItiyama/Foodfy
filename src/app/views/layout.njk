@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        {% block head %}
-            <title>Foodfy</title>
-        {% endblock %}
-         
-        {% include "admin/parts/styles.njk" %}
-        
-    </head>
-
-    <body>
-        <header>
-            <a href="/"><img src="/images/logo.png" alt="Foodfy"></a>
-
-            <div  class="menu">
-                <a href="/recipes/about">Sobre</a>
-                <a href="/recipes">Receitas</a>
-                <a href="/chefs">Chefs</a>
-                <a href="/admin/users">Usuários</a>
-                {% if session.userId %}
-                    <form action="/admin/logout" method="POST">
-                        <button class="logout">SAIR</button>
-                    </form>
-                {% else %}
-                        <a href="/accounts">ENTRAR</a>
-                {% endif %}
-            </div>
+    <div class="container">
+        <head>
+            <meta charset="UTF-8">
+            {% block head %}
+                <title>Foodfy</title>
+            {% endblock %}
             
+            {% include "admin/parts/styles.njk" %}
+            
+        </head>
 
-        </header>
+        <body>
+            <header>
+                <a href="/"><img src="/images/logo.png" alt="Foodfy"></a>
 
-        {% include "admin/parts/messages.njk" %}
+                <div  class="menu">
+                    <a href="/">Home</a>
+                    <a href="/recipes/about">Sobre</a>
+                    <a href="/recipes">Receitas</a>
+                    <a href="/chefs">Chefs</a>
+                    {% if session.userId %}
+                        <a href="/admin/users">Usuários</a>
+                    {% endif %}
+                    
+                    {% if session.userId %}
+                        <form action="/admin/logout" method="POST">
+                            <button class="logout">SAIR</button>
+                        </form>
+                    {% else %}
+                            <a class="login" href="/accounts">ENTRAR</a>
+                    {% endif %}
+                </div>
+                
 
-        {% block content %} {% endblock %}
+            </header>
 
-        <script src="/scripts.js"></script>
-        <footer>
-                <h4>Todos os direitos reservados, receitas Foodfy.</h4>
-        </footer>
-    </body>
+            {% include "admin/parts/messages.njk" %}
+
+            {% block content %} {% endblock %}
+
+            <script src="/scripts.js"></script>
+            <footer>
+                    <h4>Todos os direitos reservados, receitas Foodfy.</h4>
+            </footer>
+        </body>
+    </div>
 </html>

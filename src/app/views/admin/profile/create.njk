@@ -10,8 +10,9 @@
     <form method="post" action="/admin/users">
         <div class="header">
             <h2>Criar Usuário</h2>
-            
-            <button class="register_button" type="submit">Salvar</button>
+            {% if session.admin == true %}
+                <button class="register_button" type="submit">Salvar</button>
+            {% endif %}
         </div>
         
         {% include "admin/profile/fields.njk" %}

@@ -1,0 +1,55 @@
+
+/*=== USER CREATE ===*/
+
+.user-register .checkbox {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.user-register .checkbox input {
+    margin-left: 11.5%; 
+}
+
+.user-register .checkbox label {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*===DELETE USER ===*/
+
+.delete_user {
+    display: inline-block;
+}
+
+a.button.cancel_button {
+    position: absolute;
+    background-color: #999;
+    margin-left: 67%;
+    margin-top: 50px;
+}
+
+.delete_block {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    align-items: center;
+    gap: 60%;
+    margin-left: 22%;
+    margin-top: 200px;
+}
+
+.delete_block p {
+    margin-top: 20px;
+    padding: 4px 8px;
+    border: 1px solid #c9bfbf;
+}
+
+.button_delete.users button {
+    margin-top: 5px;
+    margin-left: 40%;
+}
+
+.delete_user h2 {
+    position: absolute;
+}

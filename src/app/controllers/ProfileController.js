@@ -8,14 +8,18 @@ module.exports = {
     async post(req, res) {
         try {
             const userId = await User.create(req.body);
-            req.session.userId = userId;
-    
+            const user = await User.findOne({where: {id:userId}})
+            
+            req.session.userId = user.id;
+            req.session.admin = user.is_admin;
+            
+            console.log(req.session)
             return res.redirect('/admin/profile')
         } catch(err) {
             console.error(err)
         }
     },
-
+ 
     async index(req, res) {
         const {user} = req;
 

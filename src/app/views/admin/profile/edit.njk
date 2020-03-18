@@ -7,19 +7,14 @@
 {% block content %}
 
     <section class="user-register profile">
-        <form id="delete" action="/admin/users?_method=DELETE" method="POST" >
-            <div class="button_delete users">
-                <button type="submit">Deletar</button>
-            </div>
-            <input type="hidden" name="id" value="{{user.id}}">
-        </form>
-
+        <a class="button cancel_button edit" href="/admin/users">Cancelar</a>
 
         <form action="/admin/users?_method=PUT" method="POST">
             <div class="header">
                 <h2>Atualizar Usuário</h2>
-
-                <button class="register_button" type="submit">Salvar</button>
+                {% if session.admin == true %}
+                    <button class="register_button" type="submit">Salvar</button>
+                {% endif %}
             </div>
 
             {% include "admin/profile/fields.njk" %}
