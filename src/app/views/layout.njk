@@ -21,7 +21,7 @@
                     <a href="/recipes/about">Sobre</a>
                     <a href="/recipes">Receitas</a>
                     <a href="/chefs">Chefs</a>
-                    {% if session.userId %}
+                    {% if session.admin == true %}
                         <a href="/admin/users">Usuários</a>
                     {% endif %}
                     

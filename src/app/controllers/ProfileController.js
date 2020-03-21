@@ -13,7 +13,6 @@ module.exports = {
             req.session.userId = user.id;
             req.session.admin = user.is_admin;
             
-            console.log(req.session)
             return res.redirect('/admin/profile')
         } catch(err) {
             console.error(err)
