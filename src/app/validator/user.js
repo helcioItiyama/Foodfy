@@ -14,7 +14,6 @@ function checkAllFields(body) {
 }
 
 module.exports = {
-    
     async post(req, res, next) {
         //check if all fields are filled
         const fillAllFields = checkAllFields(req.body);

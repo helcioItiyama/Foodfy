@@ -1,8 +1,11 @@
+const {unlinkSync} = require('fs');
+
+const {date} = require('../../lib/utils');
+
 const Chef = require('../models/Chef');
 const File = require('../models/File');
 const FileRecipe = require("../models/FileRecipe");
 
-const {date} = require('../../lib/utils')
 
 module.exports = {
     async index(req, res) {
@@ -114,7 +117,6 @@ module.exports = {
             let fileId = await File.create({name: filename, path})
 
             const {name} = req.body;
-
             await Chef.update(req.body.id, {
                 name,
                 created_at: date(Date.now()).iso,
@@ -123,27 +125,27 @@ module.exports = {
 
         } else {
             let foundChef = await Chef.find(req.body.id);
-
             if(!foundChef) return res.send("chef not found!")
-
             let chef = await Chef.files(foundChef.id, 'id')
 
             const {name} = req.body;
-
             await Chef.update(req.body.id, {
                 name,
                 created_at: date(Date.now()).iso,
                 file_id: chef[0].file_id
-
             });
         }
 
         if(req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",");
-            
             const lastIndex = removedFiles.length - 1;
             removedFiles.splice(lastIndex, 1)
-            File.delete(removedFiles[0])
+            
+            const id = removedFiles[0];
+            const file = await File.findOne({where: {id}})
+
+            unlinkSync(file.path)
+            File.delete(file.id)
         }
     
         return res.redirect(`/chefs/${req.body.id}`)
@@ -155,8 +157,17 @@ module.exports = {
         if(chef[0].total_recipes > 0) {
             return res.send("Somente chefs sem receitas podem ser deletados")// enviar como mensagem de erro
         }
-        
-        await Chef.delete(req.body.id)
+
+        const files = await Chef.files(req.body.id, 'id')
+        await Chef.delete(req.body.id);
+        files.map(file => {
+            try {
+                File.delete(file.file_id)
+                unlinkSync(file.path)
+            } catch(error) {
+                console.error(error)
+            }
+        })
         return res.redirect("/chefs")      
     }
-};
+}; 

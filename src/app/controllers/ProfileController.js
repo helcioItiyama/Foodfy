@@ -1,3 +1,7 @@
+const {hash} = require('bcryptjs');
+
+const {date} = require('../../lib/utils')
+
 const User = require('../models/User');
 
 module.exports = {
@@ -7,7 +11,18 @@ module.exports = {
 
     async post(req, res) {
         try {
-            const userId = await User.create(req.body);
+            let {name, email, password, admin} = req.body;
+
+            const passwordHash = await hash(password, 8);
+
+            const userId = await User.create({
+                name,
+                email,
+                password: passwordHash,
+                is_admin: admin,
+                created_at: date(Date.now()).iso
+            });
+
             const user = await User.findOne({where: {id:userId}})
             
             req.session.userId = user.id;
@@ -27,13 +42,13 @@ module.exports = {
 
     async put(req, res) {
         try {
-            let {name, email, admin} = req.body;
+            let {name, email} = req.body;
             const{user} = req;
 
-            await User.update(user.id, {name, email, admin});
+            await User.update(user.id, {name, email});
 
             return res.render('admin/users/index', {
-                user,
+                user: req.body,
                 success: "Conta atualizada com sucesso!"
             })
 

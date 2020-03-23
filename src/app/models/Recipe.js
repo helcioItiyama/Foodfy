@@ -1,6 +1,5 @@
 const db = require('../../config/db');
 const Base = require('./Base');
-const {date} = require('../../lib/utils')
 
 Base.init({table: 'recipes'});
 

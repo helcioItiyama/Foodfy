@@ -1,7 +1,11 @@
+const crypto = require('crypto');
+const {hash} = require('bcryptjs');
+
+const mailer = require('../../lib/mailer');
+const {date} = require('../../lib/utils')
+
 const Profile = require('../models/Profile');
 const User = require('../models/User');
-const mailer = require('../../lib/mailer');
-const crypto = require('crypto');
 
 module.exports = {
     async list(req, res) {
@@ -33,10 +37,20 @@ module.exports = {
     create(req, res) {
         return res.render("admin/profile/create")
     }, 
-
+ 
     async post(req, res) {
         try {
-            const userId = await Profile.create(req.body);
+            const {name, email, admin=false} = req.body;
+            const pin = Math.random().toString(36).slice(-8).toUpperCase();
+            const passwordHash = await hash(pin, 8);
+
+            const userId = await Profile.create({
+                name,
+                email,
+                password: passwordHash,
+                is_admin: admin,
+                created_at: date(Date.now()).iso
+            });
             const user = await User.findOne({where: {id:userId}});
 
             //create token for user
@@ -56,7 +70,7 @@ module.exports = {
                 subject: 'Você foi convidado a participar do Foodfy',
                 html: `<h2>Olá ${user.name}!</h2>
                 <p>Você foi convidado para ser membro do site de receitas Foodfy!</p>
-                <p>Geramos uma senha automática para o seu acesso ao sistema: ${user.password}!</p>
+                <p>Geramos uma senha automática para o seu acesso ao sistema: ${pin}</p>
                 <p>Caso queira criar uma nova senha, click no link abaixo: </p>
                 <p>
                     <a href='http://localhost:5000/admin/password-reset?token=${token}' target="_blank">
@@ -81,14 +95,12 @@ module.exports = {
         if(!user) return res.render("admin/profile/list", {
             error: "Usuário não encontrado!"
         })
-
         return res.render(`admin/profile/edit`, {user})
     },
 
     async put(req, res) {
         try {
             let {id, name, email, admin=false} = req.body;
-           
             await User.update(id, {name, email, is_admin:admin});
             
             return res.render('admin/profile/edit', {
@@ -118,7 +130,6 @@ module.exports = {
 
     async delete(req, res) {
        await Profile.delete(req.body.id)
-       req.session.destroy();
        return res.redirect('/admin/users')
     }
 }

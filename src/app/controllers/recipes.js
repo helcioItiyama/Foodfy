@@ -1,8 +1,10 @@
+const {date} = require('../../lib/utils')
+
+const {unlinkSync} = require('fs')
+
 const Recipe = require('../models/Recipe');
 const File = require('../models/File');
 const FileRecipe = require('../models/FileRecipe');
-
-const {date} = require('../../lib/utils')
 
 module.exports = {
     async home(req, res) {
@@ -147,8 +149,6 @@ module.exports = {
             ...file,
             src: `${file.path.replace("public", "")}`
         }))
-
-        console.log(files)
        
         return res.render("admin/recipes/show", {item: recipe, files})
     },
@@ -192,15 +192,18 @@ module.exports = {
                 file_id: fileId
                 }))
                 await Promise.all(relationPromise)
-            
         }
 
         if(req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",");
             const lastIndex = removedFiles.length - 1;
             removedFiles.splice(lastIndex, 1)
-            console.log(removedFiles)
-            const removedFilesPromise = removedFiles.map(id => File.delete(id))
+            
+            const removedFilesPromise = removedFiles.map(async id => {
+                const file = await File.findOne({where: {id}})
+                File.delete(id)
+                unlinkSync(file.path)
+            })
             await Promise.all(removedFilesPromise)
         }
 
@@ -230,9 +233,19 @@ module.exports = {
     },
     
     async delete(req, res) {
+        const files = await FileRecipe.files(req.body.id, 'recipe_id')
         await Recipe.delete(req.body.id)
+        
+        files.map(file => {
+            try {
+                File.delete(file.file_id)
+                unlinkSync(file.path)
+
+            } catch(error) {
+                console.error(error)
+            }
+        })
         return res.redirect("/recipes")
     }
-
 };
 
