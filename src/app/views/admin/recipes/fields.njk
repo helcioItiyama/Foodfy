@@ -24,7 +24,7 @@
     <div id="photos-preview">
         {% if files %}
             {% for image in files %}
-                <div class="photo" id="{{image.id}}">
+                <div class="photo" id="{{image.file_id}}">
                     <img src="{{image.src}}" alt="{{image.name}}">
                     <i class="material-icons"
                         onclick="PhotosUpload.removeOldPhoto(event)"
@@ -82,7 +82,7 @@
                     {% endif %}
                 </div>
 
-            <button type="button" class="add-ingredient" value="{{item.ingredients}}">Adicionar novo ingrediente</button>
+            <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
 
             <h5>Modo de preparo</h5>
 

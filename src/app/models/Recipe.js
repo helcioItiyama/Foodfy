@@ -1,7 +1,12 @@
 const db = require('../../config/db');
-const { date } = require('../../lib/utils');
+const Base = require('./Base');
+const {date} = require('../../lib/utils')
+
+Base.init({table: 'recipes'});
 
 module.exports = {
+    ...Base,
+
     all() {
         return db.query(`
         SELECT recipes.*, chefs.name AS chefs_name
@@ -9,43 +14,6 @@ module.exports = {
         LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
         ORDER BY created_at DESC
         `)
-    },
-
-    create(data) {
-        const query = `
-        INSERT INTO recipes(
-            title,
-            ingredients,
-            preparation,
-            information,
-            created_at,
-            chef_id,
-            user_id
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING id`
-
-        const filteredIngredients = data.ingredients.filter(function (ingredients) {
-            return ingredients != ""
-        })
-
-        const filteredPreparation = data.preparation.filter(function (preparation) {
-            return preparation != ""
-        })
-
-        ingredients = filteredIngredients
-        preparation = filteredPreparation
-
-        const values = [
-            data.title,
-            ingredients,
-            preparation,
-            data.information,
-            date(Date.now()).iso,
-            data.chefs,
-            data.userId
-        ]
-
-        return db.query(query, values)
     },
 
     find(id) {
@@ -60,45 +28,6 @@ module.exports = {
     chefSelectOptions() {
         return db.query(`SELECT name, id
             FROM chefs`)
-    },
- 
-    update(data) {
-        const query = `
-            UPDATE recipes
-            SET title = ($1),
-                ingredients = ($2),
-                preparation = ($3),
-                information = ($4),
-                created_at = ($5),
-                chef_id = ($6)
-            WHERE id = $7`
-
-        const filteredIngredients = data.ingredients.filter(ingredients => ingredients != ""
-        );
-
-        const filteredPreparation = data.preparation.filter(preparation => preparation != ""
-        );
-
-        ingredients = filteredIngredients;
-        preparation = filteredPreparation;
-
-        const value = [
-            data.title,
-            ingredients,
-            preparation,
-            data.information,
-            date(Date.now()).iso,
-            data.chefs,
-            data.id
-        ]
-
-        return db.query(query, value)
-    },
-
-    delete(id) {
-        return db.query(`
-        DELETE FROM recipes
-        WHERE id = $1`, [id])
     },
 
     paginate(params) {
@@ -124,15 +53,5 @@ module.exports = {
             LIMIT $1 OFFSET $2`
 
         return db.query(query, [limit, offset])
-    },
-
-    files(id) {
-        return db.query(`
-        SELECT files.*, recipe_files.recipe_id as recipe_id
-        FROM files
-        LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
-        WHERE recipe_files.recipe_id = $1
-        `, [id]
-        )
-    },
+    }
 }

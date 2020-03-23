@@ -1,47 +1,11 @@
 const db = require('../../config/db');
+const Base = require('./Base');
+
 const {date} = require('../../lib/utils');
+Base.init({table: 'users'});
 
 module.exports = {
-    all(callback) {
-        db.query(`
-        SELECT *
-        FROM users
-        `, (err, results) => {
-            if(err) throw `Data error! ${err}`;
-            callback(results.rows)
-        })
-    },
-
-    async create(data) {
-        try {
-            const query = `
-            INSERT INTO users(
-                name,
-                email,
-                password,
-                is_admin,
-                created_at
-            ) VALUES ($1, $2, $3, $4, $5)
-            RETURNING id
-            `
-            const password = Math.random().toString(36).substring(0, 7)
-
-            const values = [
-                data.name,
-                data.email,
-                password,
-                data.admin || false,
-                date(Date.now()).iso
-            ]
-    
-            const results = await db.query(query, values)
-            
-            return results.rows[0].id
-            
-        } catch(err) {
-                console.error(err)
-        }
-    },
+    ...Base,
 
     delete(id) {
         try {
@@ -81,3 +45,35 @@ module.exports = {
         }
     },
 }
+
+
+    /*async create(data) {
+        try {
+            const query = `
+            INSERT INTO users(
+                name,
+                email,
+                password,
+                is_admin,
+                created_at
+            ) VALUES ($1, $2, $3, $4, $5)
+            RETURNING id
+            `
+            const password = Math.random().toString(36).substring(0, 7)
+
+            const values = [
+                data.name,
+                data.email,
+                password,
+                data.admin || false,
+                date(Date.now()).iso
+            ]
+    
+            const results = await db.query(query, values)
+            
+            return results.rows[0].id
+            
+        } catch(err) {
+                console.error(err)
+        }
+    },*/

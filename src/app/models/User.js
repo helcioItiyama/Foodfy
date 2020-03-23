@@ -1,9 +1,14 @@
-const db = require('../../config/db');
+const Base = require('./Base');
+
+Base.init({table: 'users'});
+
 const {date} = require('../../lib/utils')
 const {hash} = require('bcryptjs');
 
 module.exports = {
-    async create(data) {
+    ...Base,
+    
+    /*async create(data) {
         try {
             const query = `
             INSERT INTO users(
@@ -31,40 +36,5 @@ module.exports = {
         } catch(err) {
             console.error(err)
         }
-    },
-
-    async findOne(filter) {
-        try{
-            let query = `SELECT * FROM users`
-            Object.keys(filter).map(key => {
-                query =`${query} ${key}`
-
-                Object.keys(filter[key]).map(field => {
-                    query = `${query} ${field} = '${filter[key][field]}'`
-                })
-            })
-
-            const results = await db.query(query)
-            return results.rows[0]
-
-        } catch(err) {
-            console.error(err)
-        }
-    },
-
-    async update(id, fields) {
-        let query = "UPDATE users SET";
-        Object.keys(fields).map((key, index, array) => {
-            if((index + 1) < array.length) {
-                query = `${query}
-                ${key} = '${fields[key]}',`
-            } else {
-                query = `${query}
-                ${key} = '${fields[key]}'
-                WHERE id = ${id}`
-            }
-        })
-        await db.query(query)
-        return
-    }
+    },*/
 }
