@@ -1,6 +1,5 @@
 const {date} = require('../../lib/utils')
-
-const {unlinkSync} = require('fs')
+const DeleteFiles = require('../services/DeleteFiles');
 
 const Recipe = require('../models/Recipe');
 const File = require('../models/File');
@@ -102,22 +101,13 @@ module.exports = {
         }
 
         let {title, ingredients, preparation, information, chefs, userId} = req.body
-        
-        const filteredIngredients = ingredients.filter(function (ingredients) {
-            return ingredients != ""
-        })
-
-        const filteredPreparation = preparation.filter(function (preparation) {
-            return preparation != ""
-        })
-
-        ingredients = filteredIngredients
-        preparation = filteredPreparation
+    
+        const {checkedIngredients, checkedPreparation} = checkBlankFields(ingredients, preparation)
 
         const recipeId = await Recipe.create({
             title,
-            ingredients,
-            preparation,
+            ingredients: checkedIngredients,
+            preparation: checkedPreparation,
             information,
             created_at: date(Date.now()).iso,
             chef_id: chefs,
@@ -141,7 +131,6 @@ module.exports = {
     async show(req, res) {
         let results = await Recipe.find(req.params.id);
         const recipe = results.rows[0];
-        
         if(!recipe) return res.send("recipe not found!")
 
         let files = await FileRecipe.files(recipe.id,'recipe_id')
@@ -154,33 +143,36 @@ module.exports = {
     },
     
     async edit(req, res) {
-        //get recipes
+        //get recipes refatorar aqui
         let results = await Recipe.find(req.params.id);
         const recipe = results.rows[0];
         if(!recipe) return res.send("recipe not found!")
+        //refatorar até aqui
         
         //get chefs
         const options = await Recipe.chefSelectOptions();
         const chefOptions = options.rows;
 
-        //get images
+        //get images - refatorar aqui
         let files = await FileRecipe.files(recipe.id, 'recipe_id');
-        
         files = files.map(file => ({
             ...file,
             src: `${file.path.replace("public", "")}`
         }))
+        //refatorar até aqui
    
         return res.render("admin/recipes/edit", {item: recipe, chefOptions, files})
     },
     
     async put(req, res) {
+        //refatorar aqui
         const keys = Object.keys(req.body);
         for (let key of keys) {
             if(req.body[key] =="" && key != "removed_files") {
                 return res.send("Por favor preencha todos os campos")
             }
         }
+        //refatorar até aqui
 
         if(req.files.length != 0) {
             const newFilesPromise = req.files.map(file =>
@@ -195,35 +187,17 @@ module.exports = {
         }
 
         if(req.body.removed_files) {
-            const removedFiles = req.body.removed_files.split(",");
-            const lastIndex = removedFiles.length - 1;
-            removedFiles.splice(lastIndex, 1)
-            
-            const removedFilesPromise = removedFiles.map(async id => {
-                const file = await File.findOne({where: {id}})
-                File.delete(id)
-                unlinkSync(file.path)
-            })
-            await Promise.all(removedFilesPromise)
+            DeleteFiles.removeUpdatedFiles(req.body)
         }
 
         let {title, ingredients, preparation, information, chefs, userId} = req.body
         
-        const filteredIngredients = ingredients.filter(function (ingredients) {
-            return ingredients != ""
-        })
-
-        const filteredPreparation = preparation.filter(function (preparation) {
-            return preparation != ""
-        })
-
-        ingredients = filteredIngredients;
-        preparation = filteredPreparation;
+        const {checkedIngredients, checkedPreparation} = checkBlankFields(ingredients, preparation);
         
         await Recipe.update(req.body.id, {
             title,
-            ingredients,
-            preparation,
+            ingredients: checkedIngredients,
+            preparation: checkedPreparation,
             information,
             created_at: date(Date.now()).iso,
             chef_id: chefs,
@@ -236,16 +210,15 @@ module.exports = {
         const files = await FileRecipe.files(req.body.id, 'recipe_id')
         await Recipe.delete(req.body.id)
         
-        files.map(file => {
-            try {
-                File.delete(file.file_id)
-                unlinkSync(file.path)
+        DeleteFiles.deleteFiles(files);
 
-            } catch(error) {
-                console.error(error)
-            }
-        })
         return res.redirect("/recipes")
     }
 };
+
+function checkBlankFields(ingredients, preparation) {
+    const checkedIngredients = ingredients.filter(ingredients => ingredients != "");
+    const checkedPreparation = preparation.filter(preparation => preparation != "");
+    return {checkedIngredients, checkedPreparation}
+}
 
