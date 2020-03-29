@@ -7,23 +7,23 @@
 {% block content %}
 
 <section class="login">
-    <form method="post" action="/admin/login">
-        <div class="header">
-            <h2>Iniciar Sessão</h2>
-        </div>
-        
+    <div class="header">
+        <h2>Iniciar Sessão</h2>
+    </div>
+
+    <form method="post" action="/login">
         
         <div class="fields_login">
             {% include "admin/session/fields.njk" %}
         </div>
-        
+            
         <div class="footer">
             <ul>
                 <li>
-                    <a href="/admin/register">Registre-se</a>
+                    <a href="/register">Registre-se</a>
                 </li>
                 <li>
-                    <a href="/admin/forgot-password">Esqueci a senha?</a>
+                    <a href="/forgot-password">Esqueci a senha?</a>
                 </li>
                 <li>
                     <button class="login_button" type="submit">Acessar</button>

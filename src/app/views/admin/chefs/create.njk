@@ -5,12 +5,19 @@
     {% endblock %}
 
 {% block content %}
-    <div class="page_title">
+<section class="title">
+    <div class="page_title create_chef">
         <h2>Criando Chef</h2>
     </div>
 
     <form method="post" action="/chefs" enctype="multipart/form-data">
-    
+
+    {% if session.admin == true %}
+    <div class="edit_button save_button">
+            <button type="submit">Salvar Chef</button>
+    </div>
+    {% endif %}
+</section>
         {% include "admin/chefs/fields.njk" %}
 
     </form>

@@ -5,15 +5,14 @@ const {hash} = require('bcryptjs');
 
 module.exports = {
     loginForm(req, res) {
-        return res.render('admin/session/login')
+        return res.render('admin/session/login');
     },
 
     login(req, res) {
         try{
-
             req.session.userId = req.user.id;
             req.session.admin = req.user.is_admin;
-            return res.redirect('/admin/profile')
+            return res.redirect('admin/profile');
             
         } catch(err) {
             console.error(err)
@@ -26,12 +25,12 @@ module.exports = {
     },
 
     logout(req, res) {
-        req.session.destroy()
-        return res.redirect('/')
+        req.session.destroy();
+        return res.redirect('/');
     },
 
     forgotForm(req, res){
-        return res.render('admin/session/forgot-password')
+        return res.render('admin/session/forgot-password');
     },
 
     async forgot(req, res) {
@@ -73,7 +72,7 @@ module.exports = {
     },
 
     resetForm(req, res) {
-        return res.render('admin/session/password-reset',{token: req.query.token})
+        return res.render('admin/session/password-reset',{token: req.query.token});
     },
 
     async reset(req, res) {
@@ -95,7 +94,7 @@ module.exports = {
             })
 
         } catch(err) {
-            console.error(err)
+            console.error(err);
             return res.render('admin/session/password-reset', {
                 user: req.body,
                 token,

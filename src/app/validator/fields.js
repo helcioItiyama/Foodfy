@@ -10,11 +10,11 @@ module.exports = {
     post(req, res, next) {
         const fillAllFields = checkAllFields(req.body);
         if(fillAllFields) {
-            return res.send('Por favor, preencha todos os campos!')
+            return res.render('message/fillForm');
         }
 
         if(req.files.length == 0) {
-            return res.send("Por favor, envie ao menos uma imagem")
+            return res.render('message/uploadPhoto');
         }
         next()
     },
@@ -22,7 +22,7 @@ module.exports = {
     put(req, res, next) {
         const fillAllFields = checkAllFields(req.body);
         if(fillAllFields) {
-            return res.send('Por favor, preencha todos os campos!')
+            return res.render('message/fillForm');
         }
         next()
     }

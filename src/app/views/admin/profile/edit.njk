@@ -6,21 +6,21 @@
 
 {% block content %}
 
-    <section class="user-register profile">
+    <section class="title">
+        <div class="user-update">
+            <h2>Atualizar Usuário</h2>
+        </div>
         <a class="button cancel_button edit" href="/admin/users">Cancelar</a>
 
         <form action="/admin/users?_method=PUT" method="POST">
-            <div class="header">
-                <h2>Atualizar Usuário</h2>
-                {% if session.admin == true %}
-                    <button class="register_button" type="submit">Salvar</button>
-                {% endif %}
-            </div>
+            {% if session.admin == true %}
+                <button class="register_button" type="submit">Salvar</button>
+            {% endif %}
+    </section>
 
             {% include "admin/profile/fields.njk" %}
 
             <input type="hidden" name="id" value="{{user.id}}">
         </form>
-    </section>
     
 {% endblock %}

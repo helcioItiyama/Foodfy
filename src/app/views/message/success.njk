@@ -1,0 +1,29 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Sucesso!</title>
+    {% endblock %}
+
+{% block content %}
+<section class="lottie">
+    <h1>{{type}}{{action}} com sucesso!</h1>
+    <a class="success" href="/">Ir para a homepage</a>
+    <div class="success-lottie"></div>
+</section>
+
+    <script src="/lottie.min.js"></script>
+
+<script>
+    const element = document.querySelector('.success-lottie');
+
+    lottie.loadAnimation({
+    container: element,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '/782-check-mark-success.json',
+    }).setSpeed(0.5)
+    
+</script>
+    
+{% endblock %}

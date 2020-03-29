@@ -6,18 +6,17 @@
 
 {% block content %}
 
-<section class="user-register">
+<section class="title">
+    <div class="user-create">
+        <h2>Criar Usuário</h2>
+    </div>
     <form method="post" action="/admin/users">
-        <div class="header">
-            <h2>Criar Usuário</h2>
             {% if session.admin == true %}
                 <button class="register_button" type="submit">Salvar</button>
             {% endif %}
-        </div>
-        
+</section>    
         {% include "admin/profile/fields.njk" %}
         
     </form>
-</section>
     
 {% endblock %}

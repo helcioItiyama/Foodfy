@@ -1,19 +1,21 @@
 {% extends "layout.njk" %}
 
     {% block head %}
-        <title>Receitas</title>
+        <title>{{item.title}}</title>
     {% endblock %}
 
 {% block content %}
-    <div class="page_title">
-        <h2>Receita: {{item.title}}</h2>
-    </div>
-
-    {% if session.userId and (item.user_id == session.userId or session.admin == true) %}
-        <div class="edit_button">
-            <a class="button" href="/recipes/{{item.id}}/edit">Editar Receita</a>
+    <section class="title">
+        <div class="page_title show">
+            <h2>Receita: {{item.title}}</h2>
         </div>
-    {% endif %}
+
+        {% if session.userId and (item.user_id == session.userId or session.admin == true) %}
+            <div class="edit_button">
+                <a class="button" href="/recipes/{{item.id}}/edit">Editar Receita</a>
+            </div>
+        {% endif %}
+    </section>
 
     <section>
         <div class="recipes_page">

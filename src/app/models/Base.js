@@ -78,7 +78,11 @@ const Base = {
     },
 
     delete(id) {
-        return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])
+        try {
+            return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])
+        } catch(error) {
+            console.error(error)
+        }
     },
 
     async files(id, field) {
@@ -91,7 +95,31 @@ const Base = {
         } catch (error) {
             console.error(`database files error ${error}`)
         }
-    },
+    }, 
+
+    paginate(params) {
+        try {
+            const {filter, limit, offset} = params;
+    
+            let query = "",
+                filterQuery = "",
+                totalQuery = `(SELECT count(*) FROM ${this.table}) AS total`
+    
+            if(filter) {
+                filterQuery = `WHERE ${this.table}.name ILIKE '%${filter}%'`
+                totalQuery = `(SELECT count(*) FROM ${this.table} ${filterQuery}) AS total`
+            }
+            query = `
+                SELECT ${this.table}.*, ${totalQuery}
+                FROM ${this.table}
+                ${filterQuery}
+                LIMIT $1 OFFSET $2`
+    
+            return db.query(query, [limit, offset])
+        } catch(error) {
+            console.error(`database paginate error ${error}`)
+        }
+    }
 }
 
 module.exports = Base;

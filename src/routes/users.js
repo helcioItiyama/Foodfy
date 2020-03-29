@@ -19,20 +19,20 @@ routes.get('/forgot-password', SessionController.forgotForm);
 routes.get('/password-reset', SessionController.resetForm);
 routes.post('/forgot-password', SessionValidator.forgot, SessionController.forgot);
 routes.post('/password-reset', SessionValidator.reset, SessionController.reset);
-
+ 
 //Admin profile
 routes.get('/register', ProfileController.registerForm);
 routes.post('/register', UserValidator.post, ProfileController.post);
-routes.get('/profile', onlyAdmin, UserValidator.show, ProfileController.index);
-routes.put('/profile', onlyAdmin, UserValidator.update, ProfileController.put);
+routes.get('/admin/profile', onlyAdmin, UserValidator.show, ProfileController.index);
+routes.put('/admin/profile', onlyAdmin, UserValidator.update, ProfileController.put);
 
 //Users profile
-routes.get('/users', onlyAdmin, UserController.list);
-routes.get('/users/create', onlyAdmin, UserController.create);
-routes.post('/users', onlyAdmin, ProfileValidator.post, UserController.post);
-routes.get('/users/:id', onlyAdmin, UserController.show);
-routes.put('/users', onlyAdmin, UserController.put) // Editar um usuário
-routes.get('/users/:id/delete', onlyAdmin, UserController.deletePage);
-routes.delete('/users', onlyAdmin, UserController.delete) // Deletar um usuário
+routes.get('/admin/users', onlyAdmin, UserController.list);
+routes.get('/admin/users/create', onlyAdmin, UserController.create);
+routes.post('/admin/users', onlyAdmin, ProfileValidator.post, UserController.post);
+routes.get('/admin/users/:id', onlyAdmin, UserController.show);
+routes.put('/admin/users', onlyAdmin, UserController.put) // Editar um usuário
+routes.get('/admin/users/:id/delete', onlyAdmin, UserController.deletePage);
+routes.delete('/admin/users', onlyAdmin, UserController.delete) // Deletar um usuário
 
 module.exports = routes

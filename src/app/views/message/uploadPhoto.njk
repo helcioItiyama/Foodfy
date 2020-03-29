@@ -1,0 +1,29 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Envie ao menos uma foto</title>
+    {% endblock %}
+
+{% block content %}
+<section class="lottie">
+    <h1>Por favor, volte e envie pelo menos uma foto!</h1>
+    <a href="#" onclick="history.back()">Voltar</a>
+    <div class="upload-photo-lottie"></div>
+</section>
+
+    <script src="/lottie.min.js"></script>
+
+<script>
+    const element = document.querySelector('.upload-photo-lottie');
+
+    lottie.loadAnimation({
+    container: element,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '1159-camera.json'
+    }).setSpeed(0.5)
+    
+</script>
+    
+{% endblock %}

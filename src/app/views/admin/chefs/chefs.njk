@@ -1,30 +1,36 @@
 {% extends "layout.njk" %}
 
     {% block head %}
-        <title>Gerenciar Chefs</title>
+        <title>Chefs</title>
     {% endblock %}
 
 {% block content %}
-    <div class="page_title">
-        <h2>Gerenciar Chefs</h2>
-    </div>
-    
-    <div class="edit_button new_recipe">
-        <form action="/chefs" method="GET">
-            <input 
-                type="text"
-                    name="filter"
-                value="{{filter}}"
-                placeholder="Filtrar por chef"
-            >
-            <button type="submit">Filtrar</button>
-        </form>
-        {% if session.admin == true %}
-            <a class="button" href="/chefs/create">Adicionar Chef</a>
-        {% endif %}
-    </div>
+    <section class="title">
+        <div class="page_title">
+            <h2>Gerenciar Chefs</h2>
+        </div>
+        
+        <div class="menu-button">
+            <form action="/chefs" method="GET">
+                <input 
+                    type="text"
+                        name="filter"
+                    value="{{filter}}"
+                    placeholder="Filtrar por chef"
+                >
+                <button type="submit">Filtrar</button>
+            </form>
+            {% if session.admin == true %}
+                <a class="button" href="/chefs/create">Adicionar Chef</a>
+            {% endif %}
+        </div>
+    </section>
 
-    <section>
+    <section class="menu-card">
+        {% if filter %}
+            <h2>Procurando por: {{filter}}</h2>
+        {% endif %}
+        
         <div class="food_box chef">
             {% for item in items %}
                 <div class="recipes">
@@ -40,10 +46,12 @@
         </div>
     </section>
 
-     <div class="pagination chef"
-        data-page="{{pagination.page}}"
-        data-total="{{pagination.total}}"
-        data-filter="{{filter}}">
-    </div>
+    <section>
+        <div class="pagination chef"
+            data-page="{{pagination.page}}"
+            data-total="{{pagination.total}}"
+            data-filter="{{filter}}">
+        </div>
+    </section>
         
 {% endblock %}

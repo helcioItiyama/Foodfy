@@ -5,24 +5,30 @@
     {% endblock %}
 
 {% block content %}
-    <div class="page_title">
-        <h2>Gerenciar Receitas</h2>
-    </div>
-    
-    <div class="edit_button new_recipe">
-        <form action="/recipes" method="GET">
-            <input 
-                type="text"
-                    name="filter"
-                value="{{filter}}"
-                placeholder="Filtrar por receita ou por chef"
-            >
-            <button type="submit">Filtrar</button>
-        </form>
-        <a class="button" href="/recipes/create">Nova Receita</a>
-    </div>
+    <section class="title">
+        <div class="page_title">
+            <h2>Gerenciar Receitas</h2>
+        </div>
+        
+        <div class="menu-button">
+            <form action="/recipes" method="GET">
+                <input 
+                    type="text"
+                        name="filter"
+                    value="{{filter}}"
+                    placeholder="Filtrar por receita ou por chef"
+                >
+                <button type="submit">Filtrar</button>
+            </form>
+            <a class="button" href="/recipes/create">Nova Receita</a>
+        </div>
+    </section>
 
-    <section>
+    <section class="menu-card">
+        {% if filter %}
+            <h2>Procurando por: {{filter}}</h2>
+        {% endif %}
+        
         <div class="food_box recipe">
             {% for item in items %}
                 <div class="recipes">
@@ -35,11 +41,13 @@
         </div>
     </section>
 
-    <div 
-        class="pagination"
-        data-page="{{pagination.page}}"
-        data-total="{{pagination.total}}"
-        data-filter="{{filter}}">
-    </div>
+    <section>
+        <div 
+            class="pagination"
+            data-page="{{pagination.page}}"
+            data-total="{{pagination.total}}"
+            data-filter="{{filter}}">
+        </div>
+    </section>
     
 {% endblock %}

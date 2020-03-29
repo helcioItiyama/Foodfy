@@ -46,29 +46,5 @@ module.exports = {
         } catch(err) {
             console.log(`database checkdelete error ${err}`)
         }
-    },
-
-    paginate(params) {
-        try {
-            const {filter, limit, offset} = params;
-    
-            let query = "",
-                filterQuery = "",
-                totalQuery = `(SELECT count(*) FROM chefs) AS total`
-    
-            if(filter) {
-                filterQuery = `WHERE chefs.name ILIKE '%${filter}%'`
-                totalQuery = `(SELECT count(*) FROM chefs ${filterQuery}) AS total`
-            }
-            query = `
-                SELECT chefs.*, ${totalQuery}
-                FROM chefs
-                ${filterQuery}
-                LIMIT $1 OFFSET $2`
-    
-            return db.query(query, [limit, offset])
-        } catch(err) {
-            console.log(`database paginate error ${err}`)
-        }
     }
 }

@@ -1,0 +1,40 @@
+.lottie h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.lottie a{
+    margin-left: 430px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    padding: 9px 20px;
+    cursor: pointer;
+}
+
+a.lottie:hover {
+    color: black;
+}
+
+.lottie .fill-form-lottie {
+    height: 400px;
+}
+
+.lottie .upload-photo-lottie {
+    height: 200px;
+    margin-top: 75px;
+}
+
+.lottie a.success {
+    margin-left: 390px;
+}
+
+.lottie .success-lottie {
+    height: 350px;
+    margin-top: 75px;
+}

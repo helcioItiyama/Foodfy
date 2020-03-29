@@ -1,5 +1,62 @@
+/* === REGISTER ===*/
+.profiles_box {
+    margin-top: 50px;
+}
+
+.user-create h2 {
+    width: 855px;
+}
+
+.user-update h2 {
+    width: 720px;
+}
+
+.user-register h5 {
+    margin-top: 5px;
+    font-size: 1.4rem;
+    line-height: 50px;
+    font-weight: bold;
+    margin-left: 12%;
+    color: var(--color-letter);
+}
+
+
+.user-register .fields input, .login input {
+    border: 1px solid #c9bfbf;;
+    margin-left: 12%;
+    padding: 8px 12px;
+    width: 60%;
+}
+
+.login input {
+    align-self: center;
+    margin-left: 230px;
+    width: 500px;
+    margin-top: 10px;
+}
+
+.user-register .fields input::placeholder, .login input {
+    color: #c9bfbf;
+}
+
+.user-register .fields.register {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-left: 6%;
+}
+
+.user-register .fields h5 {
+    font-size: 1.6rem;
+    margin-top: 70px;
+}
+
 
 /*=== USER CREATE ===*/
+
+.register h2 {
+    width: 855px;
+}
 
 .user-register .checkbox {
     margin-top: 40px;
@@ -13,43 +70,45 @@
 
 .user-register .checkbox label {
     margin-left: 10px;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: bold;
 }
 
 /*===DELETE USER ===*/
 
-.delete_user {
-    display: inline-block;
+.delete_user h2{
+    border: 1px solid black;
+    width: 715px;
+}
+
+.header-delete h2{
+    width: 750px;
+}
+
+.button_delete.profile {
+    margin-right: 20px;
 }
 
 a.button.cancel_button {
-    position: absolute;
     background-color: #999;
-    margin-left: 67%;
-    margin-top: 50px;
+    margin-right: 20px;
 }
 
 .delete_block {
-    display: grid;
-    grid-template-columns: 300px 300px;
+    display: flex;
     align-items: center;
-    gap: 60%;
-    margin-left: 22%;
-    margin-top: 200px;
+    justify-content: space-around;
+    margin-top: 90px;
 }
 
 .delete_block p {
+    font-size: 1.4rem;
     margin-top: 20px;
-    padding: 4px 8px;
+    width: 200px;
+    padding: 8px 20px;
     border: 1px solid #c9bfbf;
 }
 
-.button_delete.users button {
-    margin-top: 5px;
-    margin-left: 40%;
-}
-
-.delete_user h2 {
-    position: absolute;
+.delete_block h5 {
+    font-size: 1.6rem;
 }

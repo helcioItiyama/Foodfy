@@ -1,5 +1,6 @@
 const {date} = require('../../lib/utils')
 const DeleteFiles = require('../services/DeleteFiles');
+const PageService = require('../services/PageService');
 
 const Recipe = require('../models/Recipe');
 const File = require('../models/File');
@@ -22,7 +23,11 @@ module.exports = {
             //search for images of each recipe
             const files = await FileRecipe.files(recipe.id,'recipe_id');
             //alocate to recipe.src
-            recipe.src = files[0].path.replace("public", "")
+            if(files[0]) {
+                recipe.src = files[0].path.replace("public", "")
+            } else {
+                recipe.src = 'https://placehold.it/500x500?text=PRODUTO SEM FOTO'
+            }
         })
         
         await Promise.all(recipesPromise)
@@ -35,30 +40,28 @@ module.exports = {
     },
 
     async index(req, res) {
-        let {filter, page, limit} = req.query;
-        page = page || 1;
-        limit = limit || 3;
-        let offset = limit * (page -1);
+        const params = await PageService.page(req.query);
+        let {offset, filter, limit, page} = params;
+        limit = 6;
+        offset = limit * (page -1);
+        const newParams = {offset, limit, filter, page};
 
-        const params = {
-            filter,
-            page,
-            limit,
-            offset
-        }
-
-        let results = await Recipe.paginate(params);
-        let items = results.rows;
+        const results = await Recipe.paginate(newParams);
+        const items = results.rows;
 
         const itemsPromise = items.map(async item => {
             const files = await FileRecipe.files(item.id,'recipe_id');
-            item.src = files[0].path.replace("public", "")
+            if(files[0]) {
+                item.src = files[0].path.replace("public", "")
+            } else {
+                item.src = 'https://placehold.it/500x500?text=PRODUTO SEM FOTO'
+            }
         })
 
         await Promise.all(itemsPromise)
               
         if(items[0] == undefined) {
-            return res.render("admin/recipes/recipes")
+            return res.render("admin/recipes/recipes", {error: "Ops! Busca não encontrada"})
         }
 
         const countTotal = () => {
@@ -88,18 +91,7 @@ module.exports = {
         return res.render("admin/recipes/create", {chefOptions})
     },
 
-    async post(req, res) {
-        const keys = Object.keys(req.body);
-        for (key of keys) {
-            if (req.body[key] == ""&& key != "userId") {
-                return res.send("Por favor, preencha todos os campos!")
-            }
-        }
-
-        if(req.files.length == 0) {
-            return res.send("Por favor, envie ao menos uma imagem")
-        }
-
+    async post(req, res) {  
         let {title, ingredients, preparation, information, chefs, userId} = req.body
     
         const {checkedIngredients, checkedPreparation} = checkBlankFields(ingredients, preparation)
@@ -123,73 +115,24 @@ module.exports = {
           }))
 
         await Promise.all(relationPromise)
+
+        console.log(req.body)
         
-        return res.redirect(`/recipes`)
+        return res.render("message/success", {type: "Receita ", action: "criada"})
         
     },
 
-    async show(req, res) {
-        let results = await Recipe.find(req.params.id);
-        const recipe = results.rows[0];
-        if(!recipe) return res.send("recipe not found!")
-
-        let files = await FileRecipe.files(recipe.id,'recipe_id')
-        files = files.map(file => ({
-            ...file,
-            src: `${file.path.replace("public", "")}`
-        }))
-       
+    async show(req, res) {       
+        const {recipe, files} = req.results;
         return res.render("admin/recipes/show", {item: recipe, files})
     },
     
     async edit(req, res) {
-        //get recipes refatorar aqui
-        let results = await Recipe.find(req.params.id);
-        const recipe = results.rows[0];
-        if(!recipe) return res.send("recipe not found!")
-        //refatorar até aqui
-        
-        //get chefs
-        const options = await Recipe.chefSelectOptions();
-        const chefOptions = options.rows;
-
-        //get images - refatorar aqui
-        let files = await FileRecipe.files(recipe.id, 'recipe_id');
-        files = files.map(file => ({
-            ...file,
-            src: `${file.path.replace("public", "")}`
-        }))
-        //refatorar até aqui
-   
+        const {recipe, files, chefOptions} = req.results;
         return res.render("admin/recipes/edit", {item: recipe, chefOptions, files})
     },
     
     async put(req, res) {
-        //refatorar aqui
-        const keys = Object.keys(req.body);
-        for (let key of keys) {
-            if(req.body[key] =="" && key != "removed_files") {
-                return res.send("Por favor preencha todos os campos")
-            }
-        }
-        //refatorar até aqui
-
-        if(req.files.length != 0) {
-            const newFilesPromise = req.files.map(file =>
-                File.create({name: file.filename, path: file.path}));
-                const filesId = await Promise.all(newFilesPromise);
-            
-            const relationPromise = filesId.map(fileId => FileRecipe.create({
-                recipe_id: req.body.id,
-                file_id: fileId
-                }))
-                await Promise.all(relationPromise)
-        }
-
-        if(req.body.removed_files) {
-            DeleteFiles.removeUpdatedFiles(req.body)
-        }
-
         let {title, ingredients, preparation, information, chefs, userId} = req.body
         
         const {checkedIngredients, checkedPreparation} = checkBlankFields(ingredients, preparation);
@@ -203,7 +146,7 @@ module.exports = {
             chef_id: chefs,
             user_id: userId
         })
-        return res.redirect(`/recipes/${req.body.id}`)
+        return res.render("message/success", {type: "Receita ", action: "editada"})
     },
     
     async delete(req, res) {
@@ -212,7 +155,7 @@ module.exports = {
         
         DeleteFiles.deleteFiles(files);
 
-        return res.redirect("/recipes")
+        return res.render("message/success", {type: "Receita ", action: "deletada"})
     }
 };
 

@@ -5,15 +5,17 @@
     {% endblock %}
 
 {% block content %}
-    <div class="page_title">
-        <h2>Chef: {{item.name}}</h2>
-    </div>
-
-    {% if session.admin == true %}
-        <div class="edit_button">
-            <a class="button" href="/chefs/{{item.id}}/edit">Editar Chef</a>
+    <section class="title">
+        <div class="page_title show">
+            <h2>Chef: {{item.name}}</h2>
         </div>
-    {% endif %}
+
+        {% if session.admin == true %}
+            <div class="edit_button">
+                <a class="button chef" href="/chefs/{{item.id}}/edit">Editar Chef</a>
+            </div>
+        {% endif %}
+    </section>
 
     <section>
         <div class="recipes_page"> 

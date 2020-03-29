@@ -2,36 +2,30 @@ const crypto = require('crypto');
 const {hash} = require('bcryptjs');
 
 const mailer = require('../../lib/mailer');
-const {date} = require('../../lib/utils')
+const {date} = require('../../lib/utils');
+const PageService = require('../services/PageService');
 
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 
 module.exports = {
     async list(req, res) {
-        let {filter, page, limit} = req.query;
-        page = page || 1;
-        limit = limit || 3;
-        let offset = limit * (page -1);
-
-        const params = {
-            filter,
-            page,
-            limit,
-            offset,
-        }
-        const results = await Profile.paginate(params);
+        const params = await PageService.page(req.query);
+        const results = await User.paginate(params);
         const users = results.rows;
 
         if(users[0] == undefined) {
-            return res.render("admin/profile/list")
+            return res.render("admin/chefs/chefs", {error: "Ops! Busca não encontrada"})
         }
+        
+        const {limit, page, filter} = params;
+
         const pagination = {
             total: Math.ceil(users[0].total / limit),
-            page
+            page,
         }
+
         return res.render("admin/profile/list", {users, pagination, filter})
-        
     },
 
     create(req, res) {
@@ -125,11 +119,11 @@ module.exports = {
             error: "Usuário não encontrado!"
         })
 
-        return res.render(`admin/profile/delete`, {user})
+        return res.render("admin/profile/delete", {user})
     },
 
     async delete(req, res) {
        await Profile.delete(req.body.id)
-       return res.redirect('/admin/users')
+       return res.render("message/success", {type: "Receita ", action: "deletada", path: "users/"})
     }
 }

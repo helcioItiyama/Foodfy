@@ -1,24 +1,23 @@
-const receitas = document.querySelectorAll(".seeRecipes")
+const receitas = document.querySelectorAll(".seeRecipes");
 
-const infos = document.querySelectorAll('.remove')
-const icons = document.querySelectorAll('.icons')
+const infos = document.querySelectorAll('.remove');
+const icons = document.querySelectorAll('.icons');
 
 for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener("click", () => {
        if (infos[i].classList.contains("hide")) {
            icons[i].innerHTML = "esconder";
-           infos[i].classList.remove("hide")
+           infos[i].classList.remove("hide");
        } else {
             icons[i].innerHTML = "mostrar"; 
-            infos[i].classList.add("hide")
+            infos[i].classList.add("hide");
         }
     })
 }
 
-
-// Campos dinamicos
-const buttonAddIngredient = document.querySelector("button.add-ingredient")
-const buttonAddPreparation = document.querySelector("button.add-preparation")
+//Dinamic fields
+const buttonAddIngredient = document.querySelector("button.add-ingredient");
+const buttonAddPreparation = document.querySelector("button.add-preparation");
 
 if (buttonAddIngredient && buttonAddPreparation) {
 
@@ -26,14 +25,14 @@ if (buttonAddIngredient && buttonAddPreparation) {
     buttonAddPreparation.addEventListener("click", addPreparation);
 
     function addField(fieldContainer, fields) {
-        // Realiza um clone do último ingrediente adicionado
+        // Clone the last ingredient added
         if(fieldContainer.length == 0) return 
         const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
     
-        // Não adiciona um novo input se o último tem um valor vazio
+        // Do not add a new input if the last one is null
         if (newField.children[0].value == "") return false;
     
-        // Deixa o valor do input vazio
+        //Leave the input value null
         newField.children[0].value = "";
 
         fields.appendChild(newField);
@@ -44,21 +43,16 @@ if (buttonAddIngredient && buttonAddPreparation) {
         const fieldContainer = document.querySelectorAll(".ingredient");
     
 
-        addField(fieldContainer, fieldIngredients)
+        addField(fieldContainer, fieldIngredients);
     }
     
     function addPreparation() {
         const fieldPreparation = document.querySelector("#preparation");
         const fieldContainer = document.querySelectorAll(".step");
 
-        addField(fieldContainer, fieldPreparation)
+        addField(fieldContainer, fieldPreparation);
     }    
-
 }
-
-
-
-
 
 // Delete
 const deleteButtons = document.querySelectorAll("#delete");
@@ -72,7 +66,6 @@ for (let deleteButton of deleteButtons) {
 }
 
 /* Pagination */
-
 function paginate(selectedPage, totalPages) {
     let pages = [],
         oldPage
@@ -89,11 +82,11 @@ function paginate(selectedPage, totalPages) {
             if(oldPage && currentPage - oldPage == 2) {
                 pages.push(oldPage + 1)
             }
-            pages.push(currentPage)
-            oldPage = currentPage
+            pages.push(currentPage);
+            oldPage = currentPage;
         }
     }
-    return pages
+    return pages;
 }
 
 function createPagination(pagination) {
@@ -120,11 +113,10 @@ function createPagination(pagination) {
 
 const pagination = document.querySelector(".pagination");
 if(pagination) {
-    createPagination(pagination)
+    createPagination(pagination);
 }
 
 /* === PHOTOS UPLOAD ===*/
-
 const PhotosUpload = {
     uploadLimit: 5,
     files: [],
@@ -146,19 +138,19 @@ const PhotosUpload = {
                 const image = new Image();
                 image.src = String(reader.result)
                 const div = PhotosUpload.getContainer(image)
-                PhotosUpload.preview.appendChild(div) //coloca a div criada dentro do "photos-preview"
+                PhotosUpload.preview.appendChild(div) //Insert div created inside "photos-preview"
             }
 
-            reader.readAsDataURL(file)
+            reader.readAsDataURL(file);
         })
 
-        PhotosUpload.input.files = PhotosUpload.getAllFiles()
+        PhotosUpload.input.files = PhotosUpload.getAllFiles();
     },
 
     getAllFiles() {
-        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
-        PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
-        return dataTransfer.files
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer();
+        PhotosUpload.files.forEach(file => dataTransfer.items.add(file));
+        return dataTransfer.files;
     },
 
     hasLimit(event) {
@@ -166,36 +158,36 @@ const PhotosUpload = {
         let {files: fileList} = input;
        
         if(input.name == "chefs-photos") {
-            uploadLimit = 1
+            uploadLimit = 1;
         }
 
         if(fileList.length > uploadLimit) {
-            alert(`Enviar no máximo ${uploadLimit} fotos!`)
-            event.preventDefault()
-            return true
+            alert(`Enviar no máximo ${uploadLimit} fotos!`);
+            event.preventDefault();
+            return true;
         }
 
         const photosDiv = [];
         preview.childNodes.forEach(item => {
             if(item.classList && item.classList == "photo") {
-                photosDiv.push(item)
+                photosDiv.push(item);
             }
         })
 
         const totalPhotos = fileList.length + photosDiv.length;
         if (totalPhotos > uploadLimit) {
-            alert("Você atingiu o limite máximo de fotos!")
-            event.preventDefault()
-            return true
+            alert("Você atingiu o limite máximo de fotos!");
+            event.preventDefault();
+            return true;
         }
-            return false 
+            return false;
     },
 
     getContainer (image) {
-        const div = document.createElement('div'); //cria uma div
-        div.classList.add('photo'); //coloca uma classe 'photo' na div criada
+        const div = document.createElement('div'); //create a new div
+        div.classList.add('photo'); //add class 'photo' at the div created
         div.onclick = PhotosUpload.removePhoto;
-        div.appendChild(image); //coloca a image na div criada
+        div.appendChild(image); //add an image at the div created
         div.appendChild(PhotosUpload.getRemoveButton());
         return div;
     },
@@ -212,21 +204,21 @@ const PhotosUpload = {
         const photosArray = Array.from(PhotosUpload.preview.children);
         const index = photosArray.indexOf(photoDiv);
 
-        PhotosUpload.files.splice(index, 1)
-        PhotosUpload.input.files = PhotosUpload.getAllFiles()
-        photoDiv.remove()
+        PhotosUpload.files.splice(index, 1);
+        PhotosUpload.input.files = PhotosUpload.getAllFiles();
+        photoDiv.remove();
     },
 
     removeOldPhoto(event) {
         const photoDiv = event.target.parentNode;
 
         if (photoDiv.id) {
-            const removedFile = document.querySelector('input[name="removed_files"]')
+            const removedFile = document.querySelector('input[name="removed_files"]');
             if (removedFile) {
                 removedFile.value += `${photoDiv.id},`
             }
         }
-        photoDiv.remove()
+        photoDiv.remove();
     }
 }
 
@@ -238,9 +230,9 @@ const ImageGallery = {
     setImage(e) {
         const {target} = e;
 
-        ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+        ImageGallery.previews.forEach(preview => preview.classList.remove('active'));
 
-        target.classList.add('active')
+        target.classList.add('active');
 
         ImageGallery.highlight.src = target.src;
         LightBox.image.src = target.src;
@@ -277,14 +269,19 @@ const Validade = {
         input.value = results.value;
 
         if(results.error)
-            Validade.displayError(input, results.error)
-            
+            Validade.displayError(input, results.error);
     },
 
     clearErrors(input) {
         const errorDiv = input.parentNode.querySelector('.error');
         if(errorDiv)
             errorDiv.remove();
+        
+        const errorColor = document.querySelector('.errorColor')
+        if(errorColor)
+            errorColor.classList.remove('errorColor')
+
+        
     },
 
     displayError(input, error){
@@ -293,6 +290,8 @@ const Validade = {
         div.innerHTML = error;
         input.parentNode.appendChild(div);
         input.focus();
+        const errorColor = document.querySelector('.fields_login')
+        errorColor.classList.add('errorColor')
     },
 
     isEmail(value) {
@@ -301,13 +300,11 @@ const Validade = {
         const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
         if (!value.match(emailFormat))
-            error = "Email inválido"
+            error = "Email inválido";
 
         return {
             error, 
             value
         }
-
-
     }
 }

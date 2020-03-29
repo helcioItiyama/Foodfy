@@ -8,8 +8,8 @@
     top: 0;
     right: 2%;
     color: white;
-    font-size: 14px;
-    padding: 32px 50px;
+    font-size: 1.4rem;
+    padding: 32px 80px;
     border-radius: 10px;
     animation: hidemessage 400ms 5s ease-out forwards;
 }
@@ -26,13 +26,17 @@
 .user-register .fields .input .error, .login .input .error {
     position: absolute;
     color: red;
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 24px;
     margin-left: 72px;
     margin-top: 10px;
 }
 
 .login .input .error {
-    margin-left: 35%;
+    margin-left: 645px;
     margin-top: 2px;
+}
+
+.fields_login.errorColor input{
+    border: 1px solid red;
 }

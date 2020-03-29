@@ -1,0 +1,29 @@
+{% extends "layout.njk" %}
+
+    {% block head %}
+        <title>Preencha todos os campos</title>
+    {% endblock %}
+
+{% block content %}
+<section class="lottie">
+    <h1>Somente chefs sem receitas podem ser excluídos!</h1>
+    <a href="#" onclick="history.back()">Voltar</a>
+    <div class="fill-form-lottie"></div>
+</section>
+
+    <script src="/lottie.min.js"></script>
+
+<script>
+    const element = document.querySelector('.fill-form-lottie');
+
+    lottie.loadAnimation({
+    container: element,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '3932-error-cross.json'
+    }).setSpeed(0.5)
+    
+</script>
+    
+{% endblock %}
