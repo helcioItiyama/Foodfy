@@ -6,8 +6,10 @@
     section.title .menu-button {
         margin: 0 auto;
     }
+
     section.title h2 {
         margin-bottom: 20px;
+        margin-top: 20px;
     }
     .register-form {
         margin: 0 auto;
