@@ -1,20 +1,25 @@
+
 .lottie h1 {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+    font-size: 1.6rem;
 }
 
 .lottie a{
-    margin-left: 430px;
+    display: block;
+    width: 80px;
+    margin: 0 auto;
     color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
     font-weight: bold;
     background-color: var(--primary-color);
     border-radius: 4px;
     padding: 9px 20px;
     cursor: pointer;
+    text-align: center;
 }
 
 a.lottie:hover {
@@ -31,7 +36,7 @@ a.lottie:hover {
 }
 
 .lottie a.success {
-    margin-left: 390px;
+    width: 170px;
 }
 
 .lottie .success-lottie {

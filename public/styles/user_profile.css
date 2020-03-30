@@ -3,12 +3,8 @@
     margin-top: 50px;
 }
 
-.user-create h2 {
-    width: 855px;
-}
-
-.user-update h2 {
-    width: 720px;
+section.user-register {
+    height: auto;
 }
 
 .user-register h5 {
@@ -16,22 +12,21 @@
     font-size: 1.4rem;
     line-height: 50px;
     font-weight: bold;
-    margin-left: 12%;
     color: var(--color-letter);
 }
 
 
 .user-register .fields input, .login input {
     border: 1px solid #c9bfbf;;
-    margin-left: 12%;
     padding: 8px 12px;
-    width: 60%;
+    width: 100%;
+    max-width: 300px;
 }
 
 .login input {
-    align-self: center;
-    margin-left: 230px;
-    width: 500px;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
     margin-top: 10px;
 }
 
@@ -40,10 +35,12 @@
 }
 
 .user-register .fields.register {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin-left: 6%;
 }
 
 .user-register .fields h5 {
@@ -76,13 +73,14 @@
 
 /*===DELETE USER ===*/
 
-.delete_user h2{
-    border: 1px solid black;
-    width: 715px;
+.edit-form, .delete-form, .register-form {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
 }
 
-.header-delete h2{
-    width: 750px;
+.delete-form{
+    width: 240px;
 }
 
 .button_delete.profile {
@@ -104,7 +102,7 @@ a.button.cancel_button {
 .delete_block p {
     font-size: 1.4rem;
     margin-top: 20px;
-    width: 200px;
+    width: auto;
     padding: 8px 20px;
     border: 1px solid #c9bfbf;
 }
@@ -112,3 +110,4 @@ a.button.cancel_button {
 .delete_block h5 {
     font-size: 1.6rem;
 }
+

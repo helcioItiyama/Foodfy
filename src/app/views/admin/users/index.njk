@@ -9,15 +9,16 @@
         <div class="header-delete">
             <h2>Bem vindo {{user.name}}</h2>
         </div>
-
-        <div class="button_delete profile">
-            <div onclick="alert('Por favor entre em contato por email para poder deletar sua conta')">
-                Deletar
+        <div class="register-form">
+            <div class="button_delete profile">
+                <div onclick="alert('Por favor entre em contato por email para poder deletar sua conta')">
+                    Deletar
+                </div>
             </div>
-        </div>
 
-        <form action="/admin/profile?_method=PUT" method="POST">
-            <button class="register_button" type="submit">Salvar</button> 
+            <form action="/admin/profile?_method=PUT" method="POST">
+                <button class="register_button" type="submit">Salvar</button> 
+        </div>
     </section>
 
             <div class="fields register">

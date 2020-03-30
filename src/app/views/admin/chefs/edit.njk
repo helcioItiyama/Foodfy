@@ -9,23 +9,24 @@
     <div class="page_title edit_chef">
             <h2>Editando Chef</h2>
     </div>
+    <div class="edit-form">
+        <form id="delete" action="/chefs?_method=DELETE" method="POST" >
+            {% if session.admin == true %}
+                <div class="edit_button button_delete">
+                    <button type="submit">Deletar</button>
+                </div>
+            {% endif %}
+            <input type="hidden" name="id" value="{{item.id}}">
+        </form>
 
-    <form id="delete" action="/chefs?_method=DELETE" method="POST" >
+        <form action="/chefs?_method=PUT" method="POST" enctype="multipart/form-data">
+        
         {% if session.admin == true %}
-            <div class="edit_button button_delete">
-                <button type="submit">Deletar</button>
-            </div>
+        <div class="edit_button save_button">
+                <button type="submit">Salvar Chef</button>
+        </div>
         {% endif %}
-        <input type="hidden" name="id" value="{{item.id}}">
-    </form>
-
-    <form action="/chefs?_method=PUT" method="POST" enctype="multipart/form-data">
-    
-    {% if session.admin == true %}
-    <div class="edit_button save_button">
-            <button type="submit">Salvar Chef</button>
     </div>
-    {% endif %}
 </section>        
         {% include "admin/chefs/fields.njk" %}
         <input type="hidden" name="id" value="{{item.id}}">

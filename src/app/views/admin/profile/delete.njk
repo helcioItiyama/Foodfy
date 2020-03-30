@@ -9,15 +9,17 @@
     <div class="delete_user">
         <h2>Deletar Usuário</h2>
     </div>
-    
-    <a class=" button cancel_button" href="/admin/users">Cancelar</a>
-    
-    {% if session.admin == true and session.userId != user.id %}
-        <form id="delete" action="/admin/users?_method=DELETE" method="POST" >
-                <button class="delete-button" type="submit">Deletar</button>
-        <input type="hidden" name="id" value="{{user.id}}">
-        </form>
-    {% endif %}
+
+    <div class="delete-form">
+        <a class=" button cancel_button" href="/admin/users">Cancelar</a>
+        
+        {% if session.admin == true and session.userId != user.id %}
+            <form id="delete" action="/admin/users?_method=DELETE" method="POST" >
+                    <button class="delete-button" type="submit">Deletar</button>
+            <input type="hidden" name="id" value="{{user.id}}">
+            </form>
+        {% endif %}
+    </div>
 
 </section>
 

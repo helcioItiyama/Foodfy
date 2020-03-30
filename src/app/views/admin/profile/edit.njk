@@ -10,12 +10,14 @@
         <div class="user-update">
             <h2>Atualizar Usuário</h2>
         </div>
-        <a class="button cancel_button edit" href="/admin/users">Cancelar</a>
+        <div class="edit-form">
+            <a class="button cancel_button edit" href="/admin/users">Cancelar</a>
 
-        <form action="/admin/users?_method=PUT" method="POST">
-            {% if session.admin == true %}
-                <button class="register_button" type="submit">Salvar</button>
-            {% endif %}
+            <form action="/admin/users?_method=PUT" method="POST">
+                {% if session.admin == true %}
+                    <button class="register_button" type="submit">Salvar</button>
+                {% endif %}
+        </div>
     </section>
 
             {% include "admin/profile/fields.njk" %}

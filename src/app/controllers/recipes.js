@@ -115,11 +115,8 @@ module.exports = {
           }))
 
         await Promise.all(relationPromise)
-
-        console.log(req.body)
         
         return res.render("message/success", {type: "Receita ", action: "criada"})
-        
     },
 
     async show(req, res) {       

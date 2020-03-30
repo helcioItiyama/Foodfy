@@ -4,6 +4,7 @@
     <div class="container">
         <head>
             <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             {% block head %}
                 <title>Foodfy</title>
             {% endblock %}
@@ -15,7 +16,7 @@
 
         <body>
             <header>
-                <div  class="menu">
+                <div class="menu">
                     <a href="/"><img src="/images/logo.png" alt="Foodfy"></a>
                     <a href="/">Home</a>
                     <a href="/recipes/about">Sobre</a>
@@ -24,6 +25,11 @@
                     {% if session.admin == true %}
                         <a href="/admin/users">Usuários</a>
                     {% endif %}
+                    <div class="menu-toggle">
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                    </div>
                     
                     {% if session.userId %}
                         <form action="/logout" method="POST">
@@ -33,6 +39,7 @@
                             <a class="login" href="/accounts">ENTRAR</a>
                     {% endif %}
                 </div>
+
             </header>
 
             {% include "admin/parts/messages.njk" %}
@@ -40,6 +47,7 @@
             {% block content %} {% endblock %}
 
             <script src="/scripts.js"></script>
+            <script src="/menu.js"></script>
             <footer>
                     <h4>Todos os direitos reservados, receitas Foodfy.</h4>
             </footer>

@@ -1,0 +1,256 @@
+@media(max-width: 779px) {
+    section.title {
+        display: block;
+        text-align: center;
+    }
+    section.title .menu-button {
+        margin: 0 auto;
+    }
+    section.title h2 {
+        margin-bottom: 20px;
+    }
+    .register-form {
+        margin: 0 auto;
+    }
+}
+
+@media(max-width: 768px) {
+    .food_box .recipes img {
+        width: 100%;
+        max-width: 310%;
+    }
+    section.title .edit-form {
+      margin: 0 auto;
+    }
+
+    .delete-form {
+        margin: 0 auto;
+    }
+}
+
+@media(max-width: 710px) {
+    html{
+        font-size: 50%;
+    }
+    .box {
+        text-align: center;
+        flex-direction: column;
+        height: 515px;
+    }
+    .recipes .profiles.users {
+        margin-left: 40%;
+    }
+}
+
+@media(max-width: 657px) {
+    .food_box.chef {
+        margin-left: 40%;
+    }
+    .user-register .fields.register {
+        display: block;
+     }
+
+     .delete_block {
+         display: block;
+     }
+
+     .delete_block h5 {
+         margin-top: 10px;
+     }
+}
+
+@media(max-width: 650px) {
+    .user-register .fields input, .login input {
+        max-width: 600px;
+    }
+}
+
+@media(max-width: 578px) {
+    section.menu-card {
+        height: 1320px;
+    }
+}
+
+@media(max-width: 520px) {
+    section.title {
+        height: 120px;
+    }
+
+    .menu-button {
+        display: block;
+        position: relative;
+    }
+
+    .menu-button input {
+        display: block;
+        margin: 0 auto;
+        width: 300px;
+    }
+    .menu-button a {
+        position: absolute;
+        margin-top: 10px;
+        right: 20%;
+    }
+
+    .menu-button button {
+        margin-top: 10px;
+        position: absolute;
+        left: 20%;
+    }
+    .food_box.chef {
+        margin-left: 30%;
+    }
+
+}
+
+@media(max-width: 425px) {
+
+    .recipes_page {
+        text-align: center;
+    }
+
+    .gallery_preview {
+        position: relative;
+       justify-content: center;
+    }
+
+    .recipes_page h3 {
+        margin-top: 5px;
+    }
+
+    .recipes_page ul {
+        margin-left: 0;
+        text-align: center;
+        list-style-type: none;
+    }
+
+    #photos-upload {
+        margin: 0 auto;
+        width: 200px;
+    }
+    .menu-button a {
+        margin-top: 10px;
+        right: 5%;
+    }
+
+    .menu-button button {
+        margin-top: 10px;
+        left: 5%;
+    }
+}
+
+@media(max-width: 420px) {
+    .menu-button input {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+    }
+}
+
+@media(max-width: 410px) {
+    html {
+        font-size: 50%;
+    }
+
+    .food_box .recipes img {
+        width: 100%;
+        max-width: 355px;
+    }
+
+    .recipes .profiles.users {
+        margin-left: 30%;
+    }
+
+    .menu a, .menu button {
+        display: none;
+    }
+
+    .menu a:first-child {
+        display: initial;
+    }
+
+    .one, .two, .three {
+        background-color: white;
+        height: 5px;
+        width: 100%;
+        margin: 6px auto;
+        transition-duration: 0.3s;
+    }
+    
+    .menu-toggle {
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        top: 20px;
+        right: 10px;
+    }
+
+    /*===FULLSCREEN===*/
+
+    .menu.on {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        z-index: 10;
+
+        display: block;
+        text-align: center;
+        padding-top: 45%;
+    }
+
+    .menu.on a, .menu.on button {
+        display: block;
+    }
+
+    .menu.on .menu-toggle {
+        top: 20px;
+        right: 10px;
+    }
+
+    .menu.on .menu-toggle .one {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu.on .menu-toggle .two {
+        opacity: 0;
+    }
+
+    .menu.on .menu-toggle .three {
+        transform: rotate(-45deg) translate(8px, -9px);
+    }
+
+    .menu.on button {
+        margin: 0 auto;
+    }
+
+    .menu.on a, .menu.on button {
+        transition-duration: 0.5s;
+        font-size: 3rem;
+        line-height: 5rem;
+    }
+}
+
+@media(max-width: 371px) {
+    .food_box.chef {
+        margin-left: 20%;
+    }
+}
+
+@media(max-width: 332px) {
+    #photos-preview img {
+        width: 285px;
+        height: 150px;
+        object-fit: cover;
+    }
+    
+    #photos-preview .photo {
+        position: relative;
+        max-width: 285px;
+    }
+    .food_box.chef {
+        margin-left: 18%;
+    }
+}

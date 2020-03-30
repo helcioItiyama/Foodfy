@@ -1,7 +1,16 @@
 /*=== LOGIN FORM ===*/
 
+.fields_login {
+    width: 100%;
+}
 section.login {
     min-height: 90%;
+}
+
+.input-login{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
 }
 
 .login h2 {
@@ -12,18 +21,18 @@ section.login {
 
 .login h5 {
     font-size: 1.6rem;
-    margin-left: 230px;
     margin-top: 30px;
 }
 
 .login .footer ul {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     list-style: none;
-    margin-top: 30px;
-    margin-left: 230px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .login .footer ul li a {

@@ -64,25 +64,25 @@ header {
     height: 366px;
     margin-top: 50px;
     border-radius: 30px;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10rem 10rem 3rem 10rem;
 }
 
 .box img {
-    position: absolute;
     max-width: 216px;
     height: 300px;
-    margin: 6.6rem 10rem 0rem 62.4rem;
 }
 
 .box h1 {
     color: var(--color-letter);
     font-weight: bold;
     width: 305px;
+    margin-bottom: 20px;
     font-size: 3.2rem;
     line-height: 3.8rem;
-    position: absolute;
-    margin: 117px 575px 211px 60px;
-
+    align-self: center;
 }
 
 .box p {
@@ -90,62 +90,33 @@ header {
     line-height: 2.8rem;
     color: #000000;
     opacity: 70%;
-    position: absolute;
     max-width: 316px;
     height: 84px;
-    margin: 165px 564px 117px 60px;
 
 }
 
 section {
-    border: none;/**/
     width: 90%;
     max-width: 940px;
     margin: 0 auto;
 }
 
 section h2, .page_title h2 {
-    margin-top: 20px;
     color: var(--color-letter);
     font-weight: bold;
     font-size: 2.4rem;
     line-height: 2.8rem;
-    border: none;/**/
-}
-
-.page_title h2 {
-    width: 240px;
-}
-
-.page_title.show h2 {
-    width: 758px;
-}
-
-.page_title.edit h2 {
-    width: 692px;
-}
-
-.page_title.edit_chef h2 {
-    width: 708px;
-}
-
-.page_title.create h2 {
-    width: 782px;
-}
-
-.page_title.create_chef h2 {
-    width: 798px;
 }
 
 section.menu-card {
-    height: 500px;
+    height: auto;
 }
 
 .food_box, .profiles_box {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 40px;
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 20px;
+    grid-gap: 18px;
     margin-bottom: 100px;
 }
 
@@ -194,6 +165,10 @@ section.menu-card {
     margin-left: 0;
     cursor: pointer;
     text-decoration: none;
+}
+
+.info h2 {
+    margin-top: 20px;
 }
 
 .profiles_box a.edit_a {
@@ -327,15 +302,13 @@ a.button.user {
 /* === RECIPE PAGE ===*/
 
 .recipes_page {
-    width: 90%;
+    width: 100%;
     max-width: 940px;
-    padding-top: 40px;
-    margin-top: 40px;
 }
 
 .recipes_page h3 {
     text-align: center;
-    margin-top: 5px;
+    margin-top: 125px;
     font-size: 4.0rem;
     line-height: 5rem;
     font-weight: bold;
@@ -380,12 +353,13 @@ a.button.user {
 section.title {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 90px;
 }
 
 .menu-button {
-    width: 653.8px;
-    border:none;/**/
+    width: 100%;
+    max-width: 653.8px;
     display: flex;
     margin-left: 50px;
     justify-content: flex-end;
@@ -409,14 +383,6 @@ a.button {
     margin-left: 20px;
 }
 
-.edit_button {
-    border: none;/**/
-}
-
-.edit_button a.button {
-    margin-left: 50.5px;
-}
-
 .edit_button a.button.chef {
     padding: 9px 28.5px ;
 }
@@ -434,8 +400,14 @@ button, a.button, .button_delete.profile {
 }
 
 .save_button {
-    margin-left: 20px;
     padding: initial;
+}
+
+.delete-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
 }
 
 .button_delete button, .button_delete.profile, button.delete-button{
@@ -475,6 +447,10 @@ button.add-preparation {
 }
 
 /*=== CREATE ===*/
+section.recipes_page.create {
+    width: 90%;
+    max-width: 940px;
+}
 
 .recipes_page.create h5{
     font-size: 1.5rem;
@@ -517,7 +493,6 @@ button.add-preparation {
 /*===PAGINATION ===*/
 
 .pagination {
-    border: none;/**/
     text-align: center;
     margin-top: 40px;
     margin-bottom: 90px;
@@ -538,7 +513,6 @@ button.add-preparation {
 }
 
 /*=== PHOTOS UPLOAD ===*/
-
 #photos-upload {
     position: relative;
     display: block;
@@ -568,23 +542,21 @@ button.add-preparation {
 
 #photos-preview {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 70%;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     grid-gap: 4px;
-    margin-left: 188px;
-    top: 310px;
-    position: absolute;
-
+    margin-top: 20px;
 }
 
 #photos-preview img {
     width: 100%;
+    width: 150px ;
     height: 150px;
     object-fit: cover;
 }
 
 #photos-preview .photo {
     position: relative;
+    max-width: 150px;
 }
 
 #photos-preview .photo i {
@@ -612,9 +584,10 @@ button.add-preparation {
 }
 
 /*===GALLERY===*/
-
 .gallery {
     width: 100%;
+    max-width: 940px;
+    position: relative;
 }
 
 .gallery .highlight > img {
@@ -630,10 +603,11 @@ button.add-preparation {
 }
 
 .gallery_preview {
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-gap: 6px;
-    margin-left: 73%;
+    right: 0;
     margin-top: 3px;
 }
 
