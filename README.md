@@ -42,7 +42,7 @@ The website was developed using responsive design to be accessible on all types 
     <img alt ="responsive design" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-15-58-35.gif" width="500px" />
 </p>
 
-## :computer: FOR THIS PROJECT IT WAS USED THE FOLLOGING TECNOLOGIES:
+## :computer: FOR THIS PROJECT IT WAS USED THE FOLLOGING TECHNOLOGIES:
 
 - [**express**](https://github.com/expressjs/express)
 - [**nunjunks**](https://github.com/mozilla/nunjucks)
@@ -55,7 +55,7 @@ The website was developed using responsive design to be accessible on all types 
 - [**lottie**](https://github.com/airbnb/lottie-web)
 
 ## :information_source: HOW TO RUN THE APPLICATION
-To clone and run this application, you'll need Git, NodeJS and Yarn.
+To clone and run this application, you'll need Git, NodeJS, Postgres and NPM.
 
 You just need to run the following commands:
 
