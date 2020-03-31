@@ -14,7 +14,7 @@ Users who are not administrators will only have access to the list and profiles 
 
 Therefore, access control for users and administrators is done through a login system.
 
-Users without registration can only view the list and details of recipes and chefs. However, if he wanted to create a recipe, he will be redirected to the login page.
+Users without registration can only view the list and details of recipes and chefs. However, if they wanted to create a recipe, they will be redirected to the login page.
 
 There are two buttons on the login page:
 
@@ -42,7 +42,7 @@ The website was developed using responsive design to be accessible on all types 
     <img alt ="responsive design" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-15-58-35.gif" width="500px" />
 </p>
 
-## :computer: FOR THIS PROJECT IT WAS USED THE FOLLOGING TECHNOLOGIES:
+## :computer: TECHNOLOGIES USED FOR THIS PROJECT:
 
 - [**express**](https://github.com/expressjs/express)
 - [**nunjunks**](https://github.com/mozilla/nunjucks)
@@ -66,6 +66,10 @@ $ git clone https://github.com/helcioItiyama/Foodfy-Final-Project.git
 
 # Go into the repository
 $ cd Foodfy-Final-Project
+
+# Create and Set the database
+$ psql -U <username> -c "CREATE DATABASE foodfy"
+$ psql -U <username> -d foodfy -f foodfy.sql
 
 # Install dependencies
 $ npm install
