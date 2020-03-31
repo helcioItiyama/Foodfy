@@ -6,7 +6,7 @@
 
 This project was developed for the final challenge of the Rocketseat Launchstore course. It is a website where users who register and become administrator can create, change and delete recipes, as well as assign them to a specific chef. They can also create, change and delete profiles of such chefs. In addition, they can invite new users, who can be administrators or not.
 
-Users who are not administrators will only have access to the list and profiles of chefs, list and details of recipes. They will also be able to create, change and delete only the recipes created by himself.
+Users who are not administrators will only have access to the list and profiles of chefs, list and details of recipes. They will also be able to create, change and delete only the recipes created by them.
 
 <p align="center">
     <img alt ="recipes list" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Receitas.png" width= "500px"/>
