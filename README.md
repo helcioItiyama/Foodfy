@@ -6,7 +6,7 @@
 
 This project was developed for the final challenge of the Rocketseat Launchstore course. It is a website where users who register and become administrator can create, change and delete recipes, as well as assign them to a specific chef. They can also create, change and delete profiles of such chefs. In addition, they can invite new users, who can be administrators or not.
 
-Users who are not administrators will only have access to the list and profiles of chefs, list and details of recipes. They will also be able to create, change and delete only the recipes created by them.
+Users who are not administrators will only have access to the list and profiles of chefs, list and details of recipes. They will also be able to create, change and delete only the recipes created by each of them.
 
 <p align="center">
     <img alt ="recipes list" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Receitas.png" width= "500px"/>
@@ -20,7 +20,7 @@ There are two buttons on the login page:
 
 **'Register'**: users will be redirected to a page to fill out a form and create a password for registration;
 
-**'Forgot password?'**: users will be redirected to a page where they can enter an email, where it will be sent the token to create a new password.
+**'Forgot password?'**: users will be redirected to a page where they can enter an email, which it will be sent the token to create a new password.
 
 <p align="center">
     <img alt ="login" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Login.png" width="500px" />
