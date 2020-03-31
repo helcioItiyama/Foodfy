@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Foodfy" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/logo2.png" width="400px" />
+    <img alt="Foodfy" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/logo2.png" width="100px" />
 </h1>
 
 ## :arrow_right: ABOUT THE PROJECT
@@ -8,7 +8,9 @@ This project was developed for the final challenge of the Rocketseat Launchstore
 
 Users who are not administrators will only have access to the list and profiles of chefs, list and details of recipes. They will also be able to create, change and delete only the recipes created by himself.
 
-![recipes list](https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Receitas.png)
+<p align="center">
+    <img alt ="recipes list" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Receitas.png" width= "500px"/>
+</p>
 
 Therefore, access control for users and administrators is done through a login system.
 
@@ -20,19 +22,25 @@ There are two buttons on the login page:
 
 **'Forgot password?'**: users will be redirected to a page where they can enter an email, where it will be sent the token to create a new password.
 
-![login page](https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Login.png)
-
+<p align="center">
+    <img alt ="login" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Login.png" width="500px />
+</p>
+                                                                                                                             
 Users who are administrators can invite friends to use the site. For inviting, they only need to enter the guest's name and email. The guest will receive an invitation via email with a temporary password to access the system.
 
 Only administrators can change or delete other users, including whether or not they can be administrators as well. Administrators can change their profiles, but to delete their account, they must send an email to the website company.
 
 Another restriction is that only chefs without assigned recipes can be deleted.
 
-![delete restriction](https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-20-39-35.gif)
+<p align="center">
+    <img alt ="delete restriction" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-20-39-35.gif" width="500px" />
+</p>
 
 The website was developed using responsive design to be accessible on all types of devices.
 
-![responsive site](https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-15-58-35.gif)
+<p align="center">
+    <img alt ="responsive design" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/2020-03-30-15-58-35.gif" width="500px" />
+</p>
 
 ## :computer: FOR THIS PROJECT IT WAS USED THE FOLLOGING TECNOLOGIES:
 
