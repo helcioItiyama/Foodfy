@@ -14,7 +14,7 @@ Users who are not administrators will only have access to the list and profiles 
 
 Therefore, access control for users and administrators is done through a login system.
 
-Users without registration can only view the list and details of recipes and chefs. However, if he wanted to create a recipe, he will be redirected to the login page.
+Users without registration can only view the list and details of recipes and chefs. However, if they wanted to create a recipe, they will be redirected to the login page.
 
 There are two buttons on the login page:
 
@@ -23,7 +23,7 @@ There are two buttons on the login page:
 **'Forgot password?'**: users will be redirected to a page where they can enter an email, where it will be sent the token to create a new password.
 
 <p align="center">
-    <img alt ="login" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Login.png" width="500px />
+    <img alt ="login" src="https://github.com/helcioItiyama/Foodfy-Final-Project/blob/master/public/images/Login.png" width="500px" />
 </p>
                                                                                                                              
 Users who are administrators can invite friends to use the site. For inviting, they only need to enter the guest's name and email. The guest will receive an invitation via email with a temporary password to access the system.
