@@ -74,36 +74,32 @@ module.exports = {
     
     async edit(req, res) {
         let {foundChef, files} = await getChef(req.params.id);
+       
         files = {...foundChef, src: files[0].path.replace("public", "")}
         return res.render("admin/chefs/edit", {item:foundChef, files})
     },
     
     async put(req, res) {
-        if(req.files.length == 0) {
-            return res.render('message/uploadPhoto');
-        }
-
         if(req.files.length != 0) {
-            const {filename, path} = req.files[0]
-            let fileId = await File.create({name: filename, path})
-            
-            const {name} = req.body;
-            await Chef.update(req.body.id, {
-                name,
-                created_at: date(Date.now()).iso,
-                file_id: fileId
-            });
+        const {filename, path} = req.files[0]
+        let fileId = await File.create({name: filename, path})
+        
+        const {name} = req.body;
+        await Chef.update(req.body.id, {
+            name,
+            file_id: fileId
+        });
+
         } else {
-            let {files} = await getChef(req.params.id);
+            if(req.body.removed_files != '' && req.files[0] == undefined) return res.render('message/uploadPhoto');
             
             const {name} = req.body;
             await Chef.update(req.body.id, {
                 name,
                 created_at: date(Date.now()).iso,
-                file_id: files[0].file_id
             });
         }
-
+        
         if(req.body.removed_files) {
             DeleteFiles.removeUpdatedFiles(req.body)
         }

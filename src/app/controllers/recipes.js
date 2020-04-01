@@ -139,7 +139,6 @@ module.exports = {
             ingredients: checkedIngredients,
             preparation: checkedPreparation,
             information,
-            created_at: date(Date.now()).iso,
             chef_id: chefs,
             user_id: userId
         })

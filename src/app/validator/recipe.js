@@ -45,6 +45,7 @@ module.exports = {
     },
 
     async put(req, res, next) {
+        console.log(req.files)
         if(req.files.length != 0) {
             const newFilesPromise = req.files.map(file =>
                 File.create({name: file.filename, path: file.path}));
